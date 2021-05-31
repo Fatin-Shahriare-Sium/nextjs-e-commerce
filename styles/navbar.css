@@ -1,3 +1,7 @@
+.navbar-container{
+    min-height: 17vh;
+}
+
 .navbar{
     display: flex;
     justify-content: space-between;
@@ -43,6 +47,77 @@
 }
 .navbar-icon--cart:hover,.navbar-icon--user:hover{
     background-color: #ffffff;
+}
+
+
+
+/* navbar2 */
+.navbar2{
+    display: flex;
+    align-items: center;
+    height: 8vh;
+    width: 97%;
+    margin: 0px auto;
+    background-color: #6AE23C;
+    font-size: 1.3rem;
+    font-weight: 500;
+    border-radius: 23px;
+}
+.navbar2 p{
+    margin: 0px;
+}
+.navbar2 > div{
+    padding:  .5%;
+}
+.navbar2-category{
+    width: 17%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border-right: 2px solid #000000;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+.navbar2-category:hover p{
+    color: #ffffff;
+}
+.navbar2-category p{
+    font-size: 2rem!important;
+    font-weight: 700!important;
+    text-align: center;
+
+}
+.navbar2-all,.navbar2-help,.navbar2-contact{
+    transition: all .3s ease;
+    cursor: pointer;
+}
+.navbar2-all:hover,.navbar2-help:hover,.navbar2-contact:hover{
+    background-color: #ffffff;
+    border-radius: 23px;
+    color: #6AE23C;
+}
+/* navabr2 end */
+
+/* carosule */
+.carosule-container{
+    display: flex;
+    width: 97%;
+    margin: 1% auto;
+}
+.carosule-left{
+    flex: .2;
+    background-color:aqua ;
+}
+.carosule-right{
+    flex: .8;
+    background-color: red;
+    overflow: hidden;
+}
+.carousel-img{
+    width: 500px;
+}
+.react-multi-carousel-list{
+    min-height: 69vh;
 }
 @-moz-document url-prefix() { 
     .navbar-search  input {
