@@ -1,0 +1,37 @@
+.section{
+    min-height: 57vh;
+    margin: 3% auto;
+    width: 97%;
+    background-color: #E1E5E0;
+    border-radius: 17px;
+}
+.section-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 95%;
+    margin: 3% auto;
+}
+.section-header p{
+    font-size: 1.7rem;
+    font-weight: 500;
+    text-decoration: 2px solid black;
+}
+.section-card__container{
+    display: flex;
+    align-items: center;
+    width: 95%;
+    margin: 0px auto
+}
+
+/* section card */
+.section-card{
+    margin: 0px 1%;
+    border: 2px solid #c5bfbf;
+    border-radius: 23px;
+    transition: transform .3s ease;
+}
+.section-card:hover{
+    box-shadow: 20px 8px 0px 0px;
+    transform: translate(2%,5%);
+}

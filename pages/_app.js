@@ -1,5 +1,6 @@
 import '../styles/globals.css'
 import '../styles/navbar.css'
+import '../styles/section.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Navbar from '../component/navbar'
 import Layout from '../component/layout'
