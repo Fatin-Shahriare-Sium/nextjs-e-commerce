@@ -1,9 +1,9 @@
 import arrow from '../assets/arrow.svg'
 
-const Navbar2 = () => {
+const Navbar2 = ({handleCategory}) => {
     return (
         <div className='navbar2'>
-            <div className="navbar2-category">
+            <div onClick={()=>handleCategory()} className="navbar2-category">
                 <p>Category</p>
                 <img src={arrow} alt="" />
             </div>
