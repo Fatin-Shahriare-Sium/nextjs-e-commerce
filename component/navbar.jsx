@@ -3,9 +3,9 @@ import search from '../assets/search.svg'
 import cart from '../assets/cart.svg'
 import user from '../assets/user.svg'
 import Navbar2 from './navbar2'
-import Carosulex from './carosulex'
-import CategorySingle from './category.single'
+
 import { useEffect, useState } from 'react'
+import Navbar3 from './navbar3'
 
 const Navbar = () => {
     let [category,setCategory]=useState(true)
@@ -40,23 +40,7 @@ const Navbar = () => {
             </div>
         </div>
         <Navbar2 handleCategory={toggleCategory}/>
-        <div className="carosule-container">
-            <div id='carosule-left' className="carosule-left">
-                <div className="category-container">
-                <CategorySingle name='Smart Phone'/>
-                <CategorySingle name='Desktop'/>
-                <CategorySingle name='Watch'/>
-                <CategorySingle name='Smart Ac'/>
-                <CategorySingle name='Motor Bike'/>
-                <CategorySingle name='Smart tv & Android Tv'/>
-                <CategorySingle name='Laptop'/>
-                </div>
-            </div>
-            <div className="carosule-right">
-            <Carosulex/>
-            </div>
-       
-        </div>
+        <Navbar3/>
         </div>
     )
 }

@@ -11,8 +11,13 @@
     "bootstrap": "^5.0.1",
     "next": "10.2.3",
     "next-images": "^1.7.0",
+    "next-redux-wrapper": "^7.0.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-multi-carousel": "^2.6.3"
+    "react-multi-carousel": "^2.6.3",
+    "react-redux": "^7.2.4",
+    "redux": "^4.1.0",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-thunk": "^2.3.0"
   }
 }

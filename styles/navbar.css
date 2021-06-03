@@ -42,7 +42,7 @@
     border-radius: 30px;
     padding: 5px;
     cursor: pointer;
-    transition: all .3s ease;
+    transition: background-color .3s ease;
     
 }
 .navbar-icon--cart:hover,.navbar-icon--user:hover{
@@ -76,7 +76,7 @@
     justify-content: space-evenly;
     border-right: 2px solid #000000;
     cursor: pointer;
-    transition: all .3s ease;
+    transition: color .3s ease;
 }
 .navbar2-category:hover p{
     color: #ffffff;

@@ -1,6 +1,6 @@
 import SectionCard from "./section-card"
 
-const Section = () => {
+const Section = ({title,product}) => {
     let brandDetails=[
         {
             img:'https://res.cloudinary.com/shimul/image/upload/v1614761599/logo-footer-main-1-1_l8ypig.png',
@@ -34,12 +34,13 @@ const Section = () => {
     return (
         <div className='section'>
             <div className="section-header">
-                <p>Shop By brands</p>
+                <p>{title}</p>
                 <button className='btn btn-outline-dark'>View All</button>
             </div>
             <div className="section-card__container mt-5">
-
-                {brandDetails.map((sig,index)=><SectionCard title={sig.title} img={sig.img}/>)}
+                {product[0].price?product.map((sig,index)=><SectionCard href={`/product/${sig._id}`} key={index} title={sig.title} priceoff={sig.priceOff} price={sig.price} img={sig.img[0].src}/>):
+                product.map((sig,index)=><SectionCard href='/brand'  title={sig.title} key={index} price='' priceoff=''  img={sig.img}/>)}
+                
             
             </div>
         </div>
