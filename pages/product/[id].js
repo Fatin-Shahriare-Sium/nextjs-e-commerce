@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import useUrl from '../../component/hooks/useUrl';
 import ImgPreviewer from '../../component/imgPriviewer';
 import cartBtn from '../../assets/cart-btn.svg'
-  import {
+import {
     EmailIcon,
     FacebookIcon,
     FacebookMessengerIcon,
@@ -25,6 +25,12 @@ import cartBtn from '../../assets/cart-btn.svg'
     WhatsappIcon,
     WorkplaceIcon
   } from "react-share";
+
+
+
+
+
+
 export async function getServerSideProps({params}){
     let {url}=useUrl()
     let res=await fetch(`${url}/product/${params.id}`)
@@ -37,7 +43,11 @@ export async function getServerSideProps({params}){
     }
 }
 const SingleProduct = ({product}) => {
+    let[btnValue,setBtnValue]=useState('des')
     console.log(product);
+    let handleBtn=useCallback(()=>{
+        setBtnValue('review')
+    },[btnValue])
     function realPrice(price,priceoff){
         let off=price * priceoff/100
         return price-off
@@ -51,6 +61,7 @@ const SingleProduct = ({product}) => {
                 <div className='single-product__header-details'>
                         <div className='single-product--title'>
                             <p>{product.title}</p>
+                            {console.log('render again')}
                         </div>
                         <p data-real={product.priceOff?realPrice(product.price,product.priceOff):''} style={product.priceOff?{marginTop:'3%',textDecoration:'line-through',color:'rgba(0,0,0,.5)'}:''} className='single-product--price'>
                             {product.price}
@@ -85,7 +96,10 @@ const SingleProduct = ({product}) => {
                 </div>
             </div>
             <div className='single-product__body'>
-
+                    <div className='single-product__body--header'>
+                        <button onClick={()=>setBtnValue('des')} className={btnValue=='des'?'btn btn-dark':'btn btn-outline-dark'}>Description</button>
+                        <button onClick={()=>setBtnValue('review')} className={btnValue=='review'?'btn btn-dark':'btn btn-outline-dark'}>Reviews</button>
+                    </div>
             </div>
         </div>
     )

@@ -1,0 +1,41 @@
+.login{
+    background-color: #ffffff;
+    border-radius: 17px;
+    box-shadow: rgb(0,0,0,.1) 1px -2px 20px 0px;
+    z-index: 17;
+    min-height: 50vh;
+}
+.login-form input{
+    font-size: 1.7rem;
+}
+.login-form{
+    width: 70%;
+    margin: 7% auto;
+}
+.login-form button{
+    font-size: 1.5rem;
+    width: 83%;
+    display: flex;
+    justify-content: center;
+    margin: 9% auto;
+}
+.login-form label{
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-color);
+}
+.login-info{
+    font-size: 1.3rem;
+    color: var(--text-color);
+    font-weight: 500;
+}
+.navbar-icon--user{
+    position: relative;
+}
+.login{
+    position: absolute;
+    right: 83%;
+    top: 130%;
+    width: 370px;
+
+}

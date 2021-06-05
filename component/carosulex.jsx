@@ -24,7 +24,7 @@ const Carosulex = () => {
       };
     return (
     
-            <Carousel showDots={true} dotListClass="custom-dot-list-style" responsive={responsive}>
+            <Carousel arrows={false}  showDots={true} dotListClass="custom-dot-list-style" responsive={responsive}>
                 <div>
                     <Image  width={500} height={500}
     objectFit="contain" src='https://res.cloudinary.com/sium/image/upload/v1622140965/a5phr8sj7cceeset6lm7.png'></Image>

@@ -109,6 +109,18 @@
 .single-product-social a{
     margin: 0px 1%;
 }
+.single-product__body--header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0px auto;
+    padding: 13px;
+    box-shadow: rgb(0,0,0,.1) 1px -2px 20px 0px;
+
+}
+.single-product__body--header button{
+    margin: 0px 1%;
+}
 .single-product__img-container{
     margin: 0px auto;
     width: 77%;
@@ -132,7 +144,6 @@
 .single-product__body{
     min-height: 80vh;
     margin-top: 5%;
-    background-color: green;
 }
 
 @media screen and (max-width:800px) {

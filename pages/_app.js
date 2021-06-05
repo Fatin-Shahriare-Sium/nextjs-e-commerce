@@ -1,6 +1,7 @@
 import '../styles/globals.css'
 import '../styles/navbar.css'
 import '../styles/section.css'
+import '../styles/login.css'
 import '../styles/single-product.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Navbar from '../component/navbar'
