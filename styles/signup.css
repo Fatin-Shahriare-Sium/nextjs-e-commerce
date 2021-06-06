@@ -1,0 +1,28 @@
+.signup{
+   width: 67%;
+   margin: 0px auto;
+}
+.signup form input{
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-color);
+}
+.signup form label{
+    font-size: 1.7rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
+.input-box{
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.input-box__eye{
+    position: absolute;
+    right: 3%;
+}
+.custom-toast{
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffffff;
+}

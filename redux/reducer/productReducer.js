@@ -3,8 +3,9 @@ import Product_Action from "../action/productAction"
 let {url} =useUrl()
 let inState={
     products:[],
-    cart:[],
-    count:5000
+    carted:[],
+    user:localStorage.getItem('userx'),
+    tokenx:localStorage.getItem('tokenx')
 }
 let productReducer=(state=inState,action)=>{
     

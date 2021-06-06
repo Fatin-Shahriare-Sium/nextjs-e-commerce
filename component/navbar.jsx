@@ -15,8 +15,12 @@ const Navbar = () => {
         console.log('Allah is Almighty');
         setCategory(pre=>!pre)
     }
+    function toggleLogin (){
+        console.log('Allah is Almighty');
+        setLogin(pre=>!pre)
+    }
     let renderLoginForm=useMemo(()=>{
-        return login && <Login/>
+        return login && <Login handle={toggleLogin}/>
     },[login])
 
     let showLoginForm=useCallback(()=>{
@@ -26,9 +30,21 @@ const Navbar = () => {
         let leftCarosule=document.getElementById('carosule-left')
         leftCarosule.style.display=category?'block':'none'
     },[category])
+
+    useEffect(()=>{
+        window.addEventListener('scroll',(e)=>{
+            let navbar=document.getElementById('navbar')
+            let navbar2=document.getElementById('navbar2')
+            // if(window.scrollY>=80){
+            //     navbar.style.position='fixed'
+            //     navbar2.style.position='fixed'
+            // }
+        })
+    },[])
     return (
         <div className='navbar-container'>
-        <div className='navbar'>
+            <div style={{zIndex:'70'}} className='fixed'>
+            <div id='navbar' className='navbar'>
             <div className="navbar-brand">
                 <p style={{fontSize:'2.7rem',fontWeight:'700'}}>Shawon Mill</p>
             </div>
@@ -43,13 +59,15 @@ const Navbar = () => {
                     <img src={cart} alt="" />
                 </div>
                 <div className="navbar-icon--user">
-                    <img onClick={()=>showLoginForm()} src={user} alt="" />
+                    <img onClick={toggleLogin} src={user} alt="" />
                     {renderLoginForm}
                 </div>
             </div>
         </div>
-        
         <Navbar2 handleCategory={toggleCategory}/>
+            </div>
+        
+        
         <Navbar3/>
         
         </div>

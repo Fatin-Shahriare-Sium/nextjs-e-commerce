@@ -143,6 +143,10 @@
 .single-category:hover{
     background-color:#6AE23C ;
 }
+.fixed{
+    position: sticky!important;
+    top: 0;
+}
 @-moz-document url-prefix() { 
     .navbar-search  input {
       font-size: 2.7rem;
