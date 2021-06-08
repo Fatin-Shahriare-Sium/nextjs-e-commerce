@@ -1,30 +1,11 @@
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import useUrl from '../../component/hooks/useUrl';
 import ImgPreviewer from '../../component/imgPriviewer';
 import cartBtn from '../../assets/cart-btn.svg'
-import {
-    EmailIcon,
-    FacebookIcon,
-    FacebookMessengerIcon,
-    HatenaIcon,
-    InstapaperIcon,
-    LineIcon,
-    LinkedinIcon,
-    LivejournalIcon,
-    MailruIcon,
-    OKIcon,
-    PinterestIcon,
-    PocketIcon,
-    RedditIcon,
-    TelegramIcon,
-    TumblrIcon,
-    TwitterIcon,
-    ViberIcon,
-    VKIcon,
-    WeiboIcon,
-    WhatsappIcon,
-    WorkplaceIcon
-  } from "react-share";
+import { useDispatch, useSelector } from 'react-redux'
+import { FacebookIcon,FacebookMessengerIcon,LinkedinIcon,TelegramIcon,TwitterIcon } from "react-share";
+import Product_Action from '../../redux/action/productAction';
+import { loadProducts } from '../../redux/reducer/productReducer';
 
 
 
@@ -44,7 +25,15 @@ export async function getServerSideProps({params}){
 }
 const SingleProduct = ({product}) => {
     let[btnValue,setBtnValue]=useState('des')
-    console.log(product);
+    let[qtyx,setQtyx]=useState(1)
+    let productArray=useSelector(state=>state.data.products)
+    let dispatch=useDispatch()
+    useEffect(()=>{
+        if(productArray.length<=0){
+            
+            dispatch(loadProducts())
+        }
+    })
     let handleBtn=useCallback(()=>{
         setBtnValue('review')
     },[btnValue])
@@ -70,14 +59,14 @@ const SingleProduct = ({product}) => {
                             {`Brand: ${product.brand}`}
                         </p>
                         <div className='single-product--qty'>
-                            <select>
+                            <select onChange={(event)=>setQtyx(event.target.value)}>
                                 <option value={1}>Qty 1</option>
                                 <option value={2}>Qty 2</option>
                                 <option value={3}>Qty 3</option>
                             </select>
                         </div>
                         <div className='single-product-btn'>
-                            <div className='single-product-btn--cart'>
+                            <div onClick={()=>dispatch({type:Product_Action.ADD_CART,payload:{id:product._id,qty:qtyx}})}  className='single-product-btn--cart'>
                                 <img src={cartBtn}/>
                                 <p>Add to Cart</p>
                             </div>

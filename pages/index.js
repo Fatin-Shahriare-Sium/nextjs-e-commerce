@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { connect, connectAdvanced, useDispatch, useSelector } from "react-redux";
+import Offcanvas from "../component/offcanvas";
 import Section from "../component/scetion";
 import Product_Action from "../redux/action/productAction";
 import { loadProducts } from "../redux/reducer/productReducer";
@@ -49,6 +50,7 @@ const Home = ({products}) => {
 ]
   return (
     <>
+    
      <Section product={brandDetails.slice(0,5)} title='Shop by brands'/>
      <Section product={products} title='Latest Products'/>
      <Section product={products.filter(sig=>sig.category=='desktop')} title='Desktop'/>

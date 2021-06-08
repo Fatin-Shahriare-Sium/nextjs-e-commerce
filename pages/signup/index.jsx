@@ -5,6 +5,8 @@ import useSignUp from "../../component/hooks/useSignup";
 import Small from "../../component/small";
 import eye from '../../assets/eye.svg'
 import eyeX from '../../assets/eye-slash.svg'
+import Offcanvas from "../../component/offcanvas";
+import CartedOffcanvas from "../../component/carted-offcanvas";
 const Index = () => {
     let {eye1,eye2,handleEye,handleSignUp,error}=useSignUp()
 
@@ -19,7 +21,7 @@ const Index = () => {
     if (process.browser) {
         window.onbeforeunload = () => {
           // your callback
-          console.log('log out router');
+          
         }
       }
     return (
@@ -62,6 +64,8 @@ const Index = () => {
                 draggable={false}
                 autoClose={2000}
                 pauseOnHover />
+
+
         </div>
     )
     }

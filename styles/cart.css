@@ -1,0 +1,36 @@
+.cart{
+    display: flex;
+    width: 100%;
+    border-bottom: 2px solid #d9d2d2;
+    min-height: 123px;
+
+}
+.cart-img{
+    
+}
+.cart-body{
+    display: flex;
+    align-items: center;
+    width: 97%;
+    margin-left: 1%;
+    justify-content: space-around;
+}
+.cart-input{
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    width: 30%;
+    margin-right: auto;
+}
+.cart-input>p{
+    margin: 0px 5%;
+}
+.cart-input__qty{
+   
+}
+.cart-input__controller{
+    padding: 1px 7px;
+    border: 2px solid #c9c9c9;
+    cursor: pointer;
+    
+}

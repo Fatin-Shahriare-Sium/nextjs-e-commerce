@@ -1,16 +1,30 @@
 import search from '../assets/search.svg'
-import cart from '../assets/cart.svg'
+import cartlogo from '../assets/cart.svg'
 import user from '../assets/user.svg'
 import Navbar2 from './navbar2'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import Navbar3 from './navbar3'
 import {useRouter} from 'next/router'
 import Login from './login'
+import CartedOffcanvas from './carted-offcanvas'
+import { connect, useSelector } from 'react-redux'
 
-const Navbar = () => {
+const Navbar = ({cartedArray}) => {
     let router=useRouter()
+
+    // let [cartedArray,setCartedArray]=useState(useSelector(state=>{ return state.data.carted}))
+    // let carted= useSelector(state=>state.data.carted)
+    // useSelector(state=>console.log(state))
+    // useEffect(()=>{
+    //     setCartedArray(carted)
+    // },[carted])
+    
+    useEffect(()=>{
+        console.log(cartedArray);
+    },[cartedArray])
     let [category,setCategory]=useState(router.pathname!=='/'?false:true)
     let [login,setLogin]=useState(false)
+    let [cart,setCart]=useState(false)
     function toggleCategory (){
         console.log('Allah is Almighty');
         setCategory(pre=>!pre)
@@ -18,6 +32,9 @@ const Navbar = () => {
     function toggleLogin (){
         console.log('Allah is Almighty');
         setLogin(pre=>!pre)
+    }
+    function toggleCartedOffcanvas(){
+        setCart(pre=>!pre)
     }
     let renderLoginForm=useMemo(()=>{
         return login && <Login handle={toggleLogin}/>
@@ -56,7 +73,7 @@ const Navbar = () => {
             </div>
             <div className="navbar-icon">
                 <div className="navbar-icon--cart">
-                    <img src={cart} alt="" />
+                    <img onClick={toggleCartedOffcanvas} src={cartlogo} alt="" />
                 </div>
                 <div className="navbar-icon--user">
                     <img onClick={toggleLogin} src={user} alt="" />
@@ -67,11 +84,19 @@ const Navbar = () => {
         <Navbar2 handleCategory={toggleCategory}/>
             </div>
         
-        
+        {cart && <CartedOffcanvas show={cart} carted={cartedArray} offcanvasHandler={toggleCartedOffcanvas}/>}
         <Navbar3/>
         
         </div>
     )
 }
 
-export default Navbar;
+// export default Navbar;
+
+let mapStateToProps=(state)=>{
+    return{
+        cartedArray:state.data.carted
+    }
+}
+
+export default connect(mapStateToProps)(Navbar)

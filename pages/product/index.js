@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { connect, useSelector } from 'react-redux'
+import CartedOffcanvas from '../../component/carted-offcanvas'
 
 const Indexy = () => {
     let product=useSelector(state=>state)
@@ -9,7 +10,7 @@ const Indexy = () => {
     },[])
     return (
         <div>
-        
+       
         </div>
     )
 }
