@@ -2,10 +2,9 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import useUrl from '../../component/hooks/useUrl';
 import ImgPreviewer from '../../component/imgPriviewer';
 import cartBtn from '../../assets/cart-btn.svg'
-import { useDispatch, useSelector } from 'react-redux'
 import { FacebookIcon,FacebookMessengerIcon,LinkedinIcon,TelegramIcon,TwitterIcon } from "react-share";
-import Product_Action from '../../redux/action/productAction';
-import { loadProducts } from '../../redux/reducer/productReducer';
+import { useData } from '../../store';
+import Product_Action from '../../store/action/productAction';
 
 
 
@@ -14,6 +13,14 @@ import { loadProducts } from '../../redux/reducer/productReducer';
 
 export async function getServerSideProps({params}){
     let {url}=useUrl()
+    
+    // if(product.length>0){
+    //     return{
+    //         props:{
+    //             product:product.find(sig=>sig._id==params.id)
+    //         }
+    //     }
+    // }
     let res=await fetch(`${url}/product/${params.id}`)
     let data=await res.json()
 
@@ -24,16 +31,18 @@ export async function getServerSideProps({params}){
     }
 }
 const SingleProduct = ({product}) => {
+    let {dispatch,productState}=useData()
+    let {url}=useUrl()
     let[btnValue,setBtnValue]=useState('des')
-    let[qtyx,setQtyx]=useState(1)
-    let productArray=useSelector(state=>state.data.products)
-    let dispatch=useDispatch()
-    useEffect(()=>{
-        if(productArray.length<=0){
-            
-            dispatch(loadProducts())
+    useEffect(async ()=>{
+        if(productState.products.length<=0){
+            let res=await fetch(`${url}/product/all`)
+            let data=await res.json()
+            dispatch({type:Product_Action.SAVE_PRODUCT,payload:{allProducts:data.allProduct}})
         }
-    })
+    },[])
+    let[qtyx,setQtyx]=useState(1)
+
     let handleBtn=useCallback(()=>{
         setBtnValue('review')
     },[btnValue])
@@ -66,7 +75,7 @@ const SingleProduct = ({product}) => {
                             </select>
                         </div>
                         <div className='single-product-btn'>
-                            <div onClick={()=>dispatch({type:Product_Action.ADD_CART,payload:{id:product._id,qty:qtyx}})}  className='single-product-btn--cart'>
+                            <div onClick={()=>dispatch({type:Product_Action.ADD_CART,payload:{id:product._id,qty:qtyx}})} className='single-product-btn--cart'>
                                 <img src={cartBtn}/>
                                 <p>Add to Cart</p>
                             </div>

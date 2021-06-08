@@ -9,27 +9,21 @@ import '../styles/single-product.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Navbar from '../component/navbar'
 import Layout from '../component/layout'
-import {createWrapper} from "next-redux-wrapper";
-import {Provider} from 'react-redux'
-import store from '../redux/store.js'
+import DataProvider from '../store'
+
  
 
 
 function  MyApp({ Component, pageProps }) {
     return(
-     <Provider store={store}>
-        <Layout>
-          <Navbar/>
-          <Component {...pageProps} />
-        </Layout>
-     </Provider>
+        <DataProvider>
+            <Layout>
+                <Navbar/>
+                <Component {...pageProps} />
+            </Layout>
+        </DataProvider>
     )
   
 }
-
-// const makeStore = () => store;
-// let wrapper=createWrapper(makeStore)
-// //withRedux wrapper that passes the store to the App Component
-// export default wrapper.withRedux(MyApp);
 
 export default MyApp;

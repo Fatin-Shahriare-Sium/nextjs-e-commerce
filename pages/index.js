@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import { connect, connectAdvanced, useDispatch, useSelector } from "react-redux";
 import Offcanvas from "../component/offcanvas";
 import Section from "../component/scetion";
-import Product_Action from "../redux/action/productAction";
-import { loadProducts } from "../redux/reducer/productReducer";
+import { useData } from "../store";
+import Product_Action from "../store/action/productAction";
+
 export async function getServerSideProps(){
     let res=await fetch('http://localhost:5000/product/all')
     let data=await res.json()
@@ -14,10 +14,12 @@ export async function getServerSideProps(){
     }
 }
 const Home = ({products}) => {
-    let dispatch=useDispatch()
-    useEffect(()=>{
-        dispatch(loadProducts())
-    },[])
+   let {dispatch,productState}=useData()
+    
+   useEffect(()=>{
+        dispatch({type:Product_Action.SAVE_PRODUCT,payload:{allProducts:products}})
+        console.log(productState);
+   },[])
   let brandDetails=[
     {
         img:'https://res.cloudinary.com/shimul/image/upload/v1614761599/logo-footer-main-1-1_l8ypig.png',
@@ -63,11 +65,3 @@ const Home = ({products}) => {
 
 
 export default Home;
-
-// let mapStateToProps=(state)=>{
-//     return{
-//         count:state.count
-//     }
-// }
-
-// export default connect(mapStateToProps,'')(Home)

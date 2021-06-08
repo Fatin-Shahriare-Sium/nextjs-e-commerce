@@ -1,31 +1,32 @@
 import useUrl from "../../component/hooks/useUrl"
+import Navbar_Action from "../action/navbarAction"
 import Product_Action from "../action/productAction"
 let {url} =useUrl()
-let inState={
-    products:[],
-    carted:[],
-    user:typeof window !=='undefined' && localStorage.getItem('userx'),
-    tokenx:typeof window !=='undefined' && localStorage.getItem('tokenx')
-}
-let productReducer=(state=inState,action)=>{
+
+let productReducer=(state,action)=>{
     if(action.type==Product_Action.SAVE_PRODUCT){
         return{
             ...state,
-            products:action.payload
+            products:action.payload.allProducts
         }
     }else if(action.type==Product_Action.ADD_CART){
         let forCart=state.products.find(sig=>sig._id==action.payload.id)
         console.log(action);
+        
+            localStorage.setItem('cartedx',JSON.stringify([...state.carted,{...forCart,qty:parseInt(action.payload.qty)}]))
+        
         return{
             ...state,
-            carted:[...state.carted,{...forCart,qty:parseInt(action.payload.qty)}]
+            carted:[...state.carted,{...forCart,qty:parseInt(action.payload.qty)}],
+            controller:{...state.controller,cartShow:true}
+
         }
     }else if(action.type==Product_Action.INCREASE_CART){
         let preCartedArray=state.carted
         let index=preCartedArray.findIndex(sig=>sig._id==action.payload.id)
         
         preCartedArray[index].qty+=1
-
+        localStorage.setItem('cartedx',JSON.stringify(preCartedArray))
         return{
             ...state,
             carted:preCartedArray
@@ -35,10 +36,25 @@ let productReducer=(state=inState,action)=>{
         let index=preCartedArray.findIndex(sig=>sig._id==action.payload.id)
 
         preCartedArray[index].qty>0 ? preCartedArray[index].qty-=1:preCartedArray
-
+        localStorage.setItem('cartedx',JSON.stringify(preCartedArray))
         return{
             ...state,
             carted:preCartedArray
+        }
+    }else if(action.type==Product_Action.REMOVE_CART){
+        
+        let filtered=state.carted.filter(sig=>sig._id!== action.payload.id)
+        
+            localStorage.setItem('cartedx',JSON.stringify(filtered))
+    
+        return{
+            ...state,
+            carted:filtered
+        }
+    }else if(action.type==Product_Action.LOAD_CART){
+        return{
+            ...state,
+            carted:localStorage.getItem('cartedx')?JSON.parse(localStorage.getItem('cartedx')):[]
         }
     }
     
@@ -47,13 +63,3 @@ let productReducer=(state=inState,action)=>{
 
 export default productReducer;
 
-
-export let loadProducts=()=>async (dispatch)=>{
-    let res=await fetch(`${url}/product/all`)
-    let data=await res.json()
-    console.log('data in redux',data.allProduct);
-    dispatch({
-        type:Product_Action.SAVE_PRODUCT,
-        payload:data.allProduct
-    })
-}

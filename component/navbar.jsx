@@ -7,24 +7,21 @@ import Navbar3 from './navbar3'
 import {useRouter} from 'next/router'
 import Login from './login'
 import CartedOffcanvas from './carted-offcanvas'
-import { connect, useSelector } from 'react-redux'
+import { useData } from '../store'
 
-const Navbar = ({cartedArray}) => {
+
+const Navbar = () => {
     let router=useRouter()
-
-    // let [cartedArray,setCartedArray]=useState(useSelector(state=>{ return state.data.carted}))
-    // let carted= useSelector(state=>state.data.carted)
-    // useSelector(state=>console.log(state))
-    // useEffect(()=>{
-    //     setCartedArray(carted)
-    // },[carted])
-    
-    useEffect(()=>{
-        console.log(cartedArray);
-    },[cartedArray])
+    let {productState}=useData()
     let [category,setCategory]=useState(router.pathname!=='/'?false:true)
     let [login,setLogin]=useState(false)
-    let [cart,setCart]=useState(false)
+    let [cart,setCart]=useState(productState.controller.cartShow)
+    console.log('productState.controller.cartShow',productState.controller.cartShow);
+    useEffect(()=>{
+        console.log(productState.controller.cartShow);
+        setCart(productState.controller.cartShow)
+    },[productState.controller.cartShow])
+   
     function toggleCategory (){
         console.log('Allah is Almighty');
         setCategory(pre=>!pre)
@@ -84,19 +81,11 @@ const Navbar = ({cartedArray}) => {
         <Navbar2 handleCategory={toggleCategory}/>
             </div>
         
-        {cart && <CartedOffcanvas show={cart} carted={cartedArray} offcanvasHandler={toggleCartedOffcanvas}/>}
+        {cart && <CartedOffcanvas show={cart} carted={productState.carted} offcanvasHandler={toggleCartedOffcanvas}/>}
         <Navbar3/>
         
         </div>
     )
 }
 
-// export default Navbar;
-
-let mapStateToProps=(state)=>{
-    return{
-        cartedArray:state.data.carted
-    }
-}
-
-export default connect(mapStateToProps)(Navbar)
+export default Navbar;
