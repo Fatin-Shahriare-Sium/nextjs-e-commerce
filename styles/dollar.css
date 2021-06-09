@@ -1,0 +1,14 @@
+.dollar{
+    position: relative;
+    font-size: 2rem;
+    margin-left: 2%;
+    font-weight: 500;
+    color: var(--text-color);
+}
+.dollar::before{
+    content: '\0024';
+    position: absolute;
+    left: -2%;
+    color: var(--text-color);
+    
+}

@@ -32,5 +32,21 @@
     padding: 1px 7px;
     border: 2px solid #c9c9c9;
     cursor: pointer;
+
     
+}
+
+.cart-calculation{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: 0px auto;
+}
+.cart-calculation button{
+    font-size: 1.7rem;
+    font-weight: 700;
+}
+.cart-calculation p{
+    font-size: 1.7rem;
+    font-weight: 700;
 }

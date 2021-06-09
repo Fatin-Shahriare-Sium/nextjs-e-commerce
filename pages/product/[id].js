@@ -5,6 +5,10 @@ import cartBtn from '../../assets/cart-btn.svg'
 import { FacebookIcon,FacebookMessengerIcon,LinkedinIcon,TelegramIcon,TwitterIcon } from "react-share";
 import { useData } from '../../store';
 import Product_Action from '../../store/action/productAction';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Navbar_Action from '../../store/action/navbarAction';
+import Dollar from '../../component/dollar';
 
 
 
@@ -13,14 +17,6 @@ import Product_Action from '../../store/action/productAction';
 
 export async function getServerSideProps({params}){
     let {url}=useUrl()
-    
-    // if(product.length>0){
-    //     return{
-    //         props:{
-    //             product:product.find(sig=>sig._id==params.id)
-    //         }
-    //     }
-    // }
     let res=await fetch(`${url}/product/${params.id}`)
     let data=await res.json()
 
@@ -31,7 +27,7 @@ export async function getServerSideProps({params}){
     }
 }
 const SingleProduct = ({product}) => {
-    let {dispatch,productState}=useData()
+    let {dispatch,productState,error}=useData()
     let {url}=useUrl()
     let[btnValue,setBtnValue]=useState('des')
     useEffect(async ()=>{
@@ -42,7 +38,14 @@ const SingleProduct = ({product}) => {
         }
     },[])
     let[qtyx,setQtyx]=useState(1)
-
+    if(error.msg){
+        toast.warning(error.msg,{
+            className:'custom-toast'
+        })
+        setTimeout(()=>{
+            dispatch({type:Navbar_Action.REMOVE_ERROR})
+        },1500)
+    }
     let handleBtn=useCallback(()=>{
         setBtnValue('review')
     },[btnValue])
@@ -52,6 +55,7 @@ const SingleProduct = ({product}) => {
     }
     return (
         <div className='single-product'>
+            <ToastContainer autoClose={1300}/>
             <div className='single-product__header'>
                 <div className='single-product__header-imgPreviewer'>
                     <ImgPreviewer img={product.img}/>
@@ -63,6 +67,7 @@ const SingleProduct = ({product}) => {
                         </div>
                         <p data-real={product.priceOff?realPrice(product.price,product.priceOff):''} style={product.priceOff?{marginTop:'3%',textDecoration:'line-through',color:'rgba(0,0,0,.5)'}:''} className='single-product--price'>
                             {product.price}
+                           
                         </p>
                         <p className='single-product--brand'>
                             {`Brand: ${product.brand}`}

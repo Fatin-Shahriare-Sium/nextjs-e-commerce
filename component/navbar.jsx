@@ -8,20 +8,18 @@ import {useRouter} from 'next/router'
 import Login from './login'
 import CartedOffcanvas from './carted-offcanvas'
 import { useData } from '../store'
+import Navbar_Action from '../store/action/navbarAction'
 
 
 const Navbar = () => {
     let router=useRouter()
-    let {productState}=useData()
+    let {productState,dispatch}=useData()
     let [category,setCategory]=useState(router.pathname!=='/'?false:true)
     let [login,setLogin]=useState(false)
-    let [cart,setCart]=useState(productState.controller.cartShow)
-    console.log('productState.controller.cartShow',productState.controller.cartShow);
-    useEffect(()=>{
-        console.log(productState.controller.cartShow);
-        setCart(productState.controller.cartShow)
-    },[productState.controller.cartShow])
-   
+    let cart=productState.controller.cartShow
+    // let [cart,setCart]=useState(productState.controller.cartShow)
+    // console.log('productState.controller.cartShow',productState.controller.cartShow);
+    
     function toggleCategory (){
         console.log('Allah is Almighty');
         setCategory(pre=>!pre)
@@ -31,7 +29,7 @@ const Navbar = () => {
         setLogin(pre=>!pre)
     }
     function toggleCartedOffcanvas(){
-        setCart(pre=>!pre)
+        dispatch({type:Navbar_Action.TOGGLE_CART})
     }
     let renderLoginForm=useMemo(()=>{
         return login && <Login handle={toggleLogin}/>
@@ -40,23 +38,9 @@ const Navbar = () => {
     let showLoginForm=useCallback(()=>{
         setLogin(pre=>!pre)
     },[login])
-    useEffect(()=>{
-        let leftCarosule=document.getElementById('carosule-left')
-        leftCarosule.style.display=category?'block':'none'
-    },[category])
 
-    useEffect(()=>{
-        window.addEventListener('scroll',(e)=>{
-            let navbar=document.getElementById('navbar')
-            let navbar2=document.getElementById('navbar2')
-            // if(window.scrollY>=80){
-            //     navbar.style.position='fixed'
-            //     navbar2.style.position='fixed'
-            // }
-        })
-    },[])
     return (
-        <div className='navbar-container'>
+        <div id='navbar-container' className='navbar-container'>
             <div style={{zIndex:'70'}} className='fixed'>
             <div id='navbar' className='navbar'>
             <div className="navbar-brand">
@@ -82,7 +66,7 @@ const Navbar = () => {
             </div>
         
         {cart && <CartedOffcanvas show={cart} carted={productState.carted} offcanvasHandler={toggleCartedOffcanvas}/>}
-        <Navbar3/>
+        {/* <Navbar3/> */}
         
         </div>
     )

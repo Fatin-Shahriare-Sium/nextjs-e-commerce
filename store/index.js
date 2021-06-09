@@ -5,7 +5,8 @@ import productReducer from "./reducer/productReducer";
 let inState={
     products:[],
     carted:[],
-    controller:{cartShow:false}
+    controller:{cartShow:false},
+    error:{msg:'',color:''}
 }
 
 
@@ -26,7 +27,8 @@ let DataProvider=({children})=>{
     let store={
        productState:state,
        auth,
-       dispatch
+       dispatch,
+       error:state.error
     }
     return(
         <DataContext.Provider value={store}>

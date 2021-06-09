@@ -1,8 +1,7 @@
 
 let Navbar_Action={
-    OPEN_CART:'open cart',
-    CLOSE_CART:'close cart',
-    TOGGLE_CART:'toggle cart'
+    TOGGLE_CART:'toggle cart',
+    REMOVE_ERROR:'remove-error'
 }
 
 export default Navbar_Action;

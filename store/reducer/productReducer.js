@@ -11,9 +11,18 @@ let productReducer=(state,action)=>{
         }
     }else if(action.type==Product_Action.ADD_CART){
         let forCart=state.products.find(sig=>sig._id==action.payload.id)
-        console.log(action);
-        
-            localStorage.setItem('cartedx',JSON.stringify([...state.carted,{...forCart,qty:parseInt(action.payload.qty)}]))
+        let alreadyIncarted=state.carted.filter(sig=>sig._id==action.payload.id)
+        if(alreadyIncarted.length>0){
+            return{
+                ...state,
+                carted:[...state.carted],
+                controller:{...state.controller,cartShow:true},
+                error:{msg:'You have already carted this item',color:'warning'}
+    
+            }
+        }
+        console.log('alreadyIncarted',alreadyIncarted);
+        localStorage.setItem('cartedx',JSON.stringify([...state.carted,{...forCart,qty:parseInt(action.payload.qty)}]))
         
         return{
             ...state,
@@ -55,6 +64,17 @@ let productReducer=(state,action)=>{
         return{
             ...state,
             carted:localStorage.getItem('cartedx')?JSON.parse(localStorage.getItem('cartedx')):[]
+        }
+    }else if(action.type==Navbar_Action.TOGGLE_CART){
+        return{
+            ...state,
+            controller:{...state.controller,cartShow:!state.controller.cartShow}
+        }
+    }else if(action.type==Navbar_Action.REMOVE_ERROR){
+        return{
+            ...state,
+            error:{msg:'',color:''}
+
         }
     }
     
