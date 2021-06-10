@@ -76,6 +76,11 @@ let productReducer=(state,action)=>{
             error:{msg:'',color:''}
 
         }
+    }else if(action.type==Navbar_Action.TOOGLE_CATEGORY){
+        return{
+            ...state,
+            carosule:{...state.carosule,category:!state.carosule.category}
+        }
     }
     
     return state;

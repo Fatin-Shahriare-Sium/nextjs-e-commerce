@@ -6,7 +6,8 @@ let inState={
     products:[],
     carted:[],
     controller:{cartShow:false},
-    error:{msg:'',color:''}
+    error:{msg:'',color:''},
+    carosule:{category:true,carosuleImg:true}
 }
 
 
@@ -28,7 +29,8 @@ let DataProvider=({children})=>{
        productState:state,
        auth,
        dispatch,
-       error:state.error
+       error:state.error,
+       carosuleState:state.carosule
     }
     return(
         <DataContext.Provider value={store}>

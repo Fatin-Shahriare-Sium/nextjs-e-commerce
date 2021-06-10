@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import Navbar3 from "../component/navbar3";
 import Offcanvas from "../component/offcanvas";
 import Section from "../component/scetion";
 import { useData } from "../store";
@@ -52,7 +53,7 @@ const Home = ({products}) => {
 ]
   return (
     <>
-    
+    <Navbar3/>
      <Section product={brandDetails.slice(0,5)} title='Shop by brands'/>
      <Section product={products} title='Latest Products'/>
      <Section product={products.filter(sig=>sig.category=='desktop')} title='Desktop'/>

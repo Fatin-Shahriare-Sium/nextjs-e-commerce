@@ -9,6 +9,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Navbar_Action from '../../store/action/navbarAction';
 import Dollar from '../../component/dollar';
+import Navbar3 from '../../component/navbar3';
 
 
 
@@ -36,7 +37,16 @@ const SingleProduct = ({product}) => {
             let data=await res.json()
             dispatch({type:Product_Action.SAVE_PRODUCT,payload:{allProducts:data.allProduct}})
         }
+       
     },[])
+    if (process.browser) {
+        window.onbeforeunload = () => {
+          // your callback
+          console.log('Allah is Almighty');
+          return window.alert('Allah is Almighty')
+        }
+      }
+    
     let[qtyx,setQtyx]=useState(1)
     if(error.msg){
         toast.warning(error.msg,{
@@ -54,6 +64,8 @@ const SingleProduct = ({product}) => {
         return price-off
     }
     return (
+        <>
+        <Navbar3/>
         <div className='single-product'>
             <ToastContainer autoClose={1300}/>
             <div className='single-product__header'>
@@ -103,8 +115,12 @@ const SingleProduct = ({product}) => {
                         <button onClick={()=>setBtnValue('des')} className={btnValue=='des'?'btn btn-dark':'btn btn-outline-dark'}>Description</button>
                         <button onClick={()=>setBtnValue('review')} className={btnValue=='review'?'btn btn-dark':'btn btn-outline-dark'}>Reviews</button>
                     </div>
+                    <div className='single-product__body--content'>
+                        <p dangerouslySetInnerHTML={{__html:product.description}}></p>
+                    </div>
             </div>
         </div>
+        </>
     )
 }
 

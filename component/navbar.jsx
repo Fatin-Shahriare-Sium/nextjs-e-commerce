@@ -17,15 +17,12 @@ const Navbar = () => {
     let [category,setCategory]=useState(router.pathname!=='/'?false:true)
     let [login,setLogin]=useState(false)
     let cart=productState.controller.cartShow
-    // let [cart,setCart]=useState(productState.controller.cartShow)
-    // console.log('productState.controller.cartShow',productState.controller.cartShow);
-    
+
     function toggleCategory (){
-        console.log('Allah is Almighty');
-        setCategory(pre=>!pre)
+        dispatch({type:Navbar_Action.TOOGLE_CATEGORY})
     }
     function toggleLogin (){
-        console.log('Allah is Almighty');
+        
         setLogin(pre=>!pre)
     }
     function toggleCartedOffcanvas(){
@@ -53,7 +50,7 @@ const Navbar = () => {
                 </div>
             </div>
             <div className="navbar-icon">
-                <div className="navbar-icon--cart">
+                <div data-length={productState.carted.length} className="navbar-icon--cart">
                     <img onClick={toggleCartedOffcanvas} src={cartlogo} alt="" />
                 </div>
                 <div className="navbar-icon--user">

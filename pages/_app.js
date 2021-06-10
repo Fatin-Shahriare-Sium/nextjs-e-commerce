@@ -11,11 +11,13 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import Navbar from '../component/navbar'
 import Layout from '../component/layout'
 import DataProvider from '../store'
-
+import {useRouter} from 'next/router'
  
 
 
 function  MyApp({ Component, pageProps }) {
+    let router=useRouter()
+    
     return(
         <DataProvider>
             <Layout>
