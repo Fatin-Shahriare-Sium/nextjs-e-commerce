@@ -1,5 +1,5 @@
 import arrow from '../assets/arrow.svg'
-
+import Link from 'next/link'
 const Navbar2 = ({handleCategory}) => {
     return (
         <div id='navbar2' className='navbar2'>
@@ -7,9 +7,11 @@ const Navbar2 = ({handleCategory}) => {
                 <p>Category</p>
                 <img src={arrow} alt="" />
             </div>
+            <Link href="/search">
             <div className='navbar2-all'>
                 <p>All products</p>
             </div>
+            </Link>
             <div className="navbar2-help">
                 <p>Help</p>
             </div>

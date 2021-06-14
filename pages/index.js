@@ -19,6 +19,7 @@ const Home = ({products}) => {
     
    useEffect(()=>{
         dispatch({type:Product_Action.SAVE_PRODUCT,payload:{allProducts:products}})
+        localStorage.setItem('__allProduct',JSON.stringify(products))
         console.log(productState);
    },[])
   let brandDetails=[

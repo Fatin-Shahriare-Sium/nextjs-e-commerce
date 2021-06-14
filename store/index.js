@@ -12,6 +12,7 @@ let inState={
 
 
 let DataContext=createContext()
+
 export let useData=()=>{
     return useContext(DataContext)
 }
