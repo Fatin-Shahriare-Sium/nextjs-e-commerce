@@ -21,6 +21,7 @@ let brandsName=[
     {name:'Apple',value:'apple'},
     {name:'Realme',value:'realme'}
 ]
+
 const SearchIndex = () => {
     let {productState,dispatch}=useData()
     let [cateArray,setCateArray]=useState(new Array(categoriesName.length).fill(false))
@@ -28,8 +29,11 @@ const SearchIndex = () => {
     let [cateValue,setcateValue]=useState([])
     let [brandValue,setbrandValue]=useState([])
     let [searchedProducts,setSearchedProducts]=useState()
+    let [value,setValue]=useState({low:'',high:''})
+    
+    
     useEffect(()=>{
-        console.log(productState);
+        
         if(productState.products.length<=0){
             let products=localStorage.getItem('__allProduct')
             dispatch({type:Product_Action.SAVE_PRODUCT,payload:{allProducts:JSON.parse(products)}})
@@ -49,26 +53,36 @@ const SearchIndex = () => {
         if(checkCateValue.length>0){
             let filteredCateValue=cateValue.filter((sig,index)=>sig!==categoriesName[position].value)
             setcateValue(filteredCateValue)
-            findSearchedProducts(filteredCateValue,brandValue)
+            findSearchedProducts(filteredCateValue,brandValue,value.low,value.high)
 
         }else{
             let sendCateValue=[...cateValue,categoriesName[position].value]
             setcateValue(sendCateValue)
-            findSearchedProducts(sendCateValue,brandValue)
+            findSearchedProducts(sendCateValue,brandValue,value.low,value.high)
         }
 
         
     }
 
-    function findSearchedProducts(categoryArray,brandArrayx){
+    function findSearchedProducts(categoryArray,brandArrayx,low,high){
         let main_ProductArray=productState.products
         let x=[]
         if(categoryArray.length<=0 && brandArrayx.length<=0){
-            return setSearchedProducts(main_ProductArray)
+            if(low && high){
+                let productThroughValue=main_ProductArray.filter(sig=>low<=sig.price && high>=sig.price)
+            return setSearchedProducts(productThroughValue)
+            }else{
+                return setSearchedProducts(main_ProductArray)
+            }
          }
         for(let i=0;i<categoryArray.length;i++){
             let result=main_ProductArray.filter(sig=>sig.category.includes(categoryArray[i]))
-            x.push(...result)
+           if(low && high){
+            let resultUsingValue=result.filter(sig=>low<=sig.price && high>=sig.price)
+            x.push(...resultUsingValue)
+           }else{
+               x.push(...result)
+           }
         }
 
         if(x.length<=0 && brandArrayx.length>0){
@@ -79,7 +93,11 @@ const SearchIndex = () => {
               
                 preresultUseingBrandValueArray.push(...resultUseingBrandValue)
             }
-            x=preresultUseingBrandValueArray
+            if(low && high){
+                x=preresultUseingBrandValueArray.filter(sig=>low<=sig.price && high>=sig.price)
+            }else{
+                x=preresultUseingBrandValueArray
+            }
         }else if(x.length>0 && brandArrayx.length>0){
             let preresultUseingBrandValueArray=[]
             for(let b=0;b<brandArrayx.length;b++){
@@ -88,14 +106,14 @@ const SearchIndex = () => {
                
                 preresultUseingBrandValueArray.push(...resultUseingBrandValue)
             }
-            x=preresultUseingBrandValueArray
-            console.log('resultUseingBrandValue',preresultUseingBrandValueArray);
+            if(low && high){
+                x=preresultUseingBrandValueArray.filter(sig=>low<=sig.price && high>=sig.price)
+            }else{
+                x=preresultUseingBrandValueArray
+            }
         }
-        
-
-        
-        
-     setSearchedProducts(x)
+                
+            setSearchedProducts(x)
     }
 
 
@@ -109,27 +127,71 @@ const SearchIndex = () => {
         let checkBrandValue=brandValue.filter(sig=>sig==brandsName[position].value)
         if(checkBrandValue.length>0){
             let filteredBrandValue=brandValue.filter(sig=>sig!==brandsName[position].value)
-            findSearchedProducts(cateValue,filteredBrandValue)
+            findSearchedProducts(cateValue,filteredBrandValue,value.low,value.high)
             setbrandValue(filteredBrandValue)
         }else{
             let sendBrandValue=[...brandValue,brandsName[position].value]
-            findSearchedProducts(cateValue,sendBrandValue)
+            findSearchedProducts(cateValue,sendBrandValue,value.low,value.high)
             setbrandValue(sendBrandValue)
         }
     }
     
+    //low to high
+    let handleAscendingOrder=()=>{
+        let searchedProductsArray=searchedProducts
+
+        searchedProductsArray.sort((a,b)=>{return a.price-b.price})
+        
+        setSearchedProducts([...searchedProductsArray])
+       
+       
+    }
     
+    //high to low
+    function handleDescendingOrder(){
+        let searchedProductsArray=searchedProducts
+        searchedProductsArray.sort((a,b)=>{return b.price-a.price})
+        
+        setSearchedProducts([...searchedProductsArray])
+    }
+    //handleSelectTag
+    let handleSelectTag=(e)=>{
+  
+        if(e.target.value=='asc'){
+           handleAscendingOrder()
+        }else if(e.target.value=='dec'){
+            handleDescendingOrder()
+        }else{
+           setSearchedProducts(productState.products)
+        }
+    }
+
+    //handlePriceInputBox
+
+    let handlePriceInputBox=(e)=>{
+        e.preventDefault()
+        let low=e.target[0].value
+        let high=e.target[1].value
+        setValue({low:low,high:high})
+        findSearchedProducts(cateValue,brandValue,low,high)        
+    }
+    
+
+
+
     return (
         <div className='search-panel'>
            <div className="search-panel__sidebar">
                 <div className="search-panel__sidebar--rangebox mt-3">
-                    <p style={{fontSize:'1.5rem',fontWeight:'700'}}>Price</p>
-                    <div className="randebox-input ">
-                        <input type="number" />
-                        <p style={{margin:'0px',fontSize:'1.3rem'}}>to</p>
-                        <input type="number" />
-                    </div>
-                    <button style={{width:'23%',fontSize:'1.3rem'}} className='btn btn-outline-success mt-3'>Go</button>
+                    <form onSubmit={(event)=>handlePriceInputBox(event)}>
+                        <p style={{fontSize:'1.5rem',fontWeight:'700'}}>Price</p>
+                        <div className="randebox-input ">
+                            <input type="number" />
+                            <p style={{margin:'0px',fontSize:'1.3rem'}}>to</p>
+                            <input type="number" />
+                        </div>
+                         <button type='submit' style={{width:'23%',fontSize:'1.3rem'}} className='btn btn-outline-success mt-3'>Go</button>
+                    </form>
                 </div>
                 <div className="search-panel__sidebar--category-box">
                     <p style={{fontSize:'1.5rem',fontWeight:'700'}}>Categories</p>
@@ -153,9 +215,9 @@ const SearchIndex = () => {
                     </div>
                     <div style={{fontSize:'1.5rem',fontWeight:'500'}} className='search-panel__navbar--sort' >
                         <p style={{margin:'0px'}}>Sort By</p>
-                        <select>
+                        <select onChange={(event)=>handleSelectTag(event)}>
                             <option value="n">Relevance</option>
-                            <option value="asc">Price:low to high</option>
+                            <option  value="asc">Price:low to high</option>
                             <option value="dec">Price:high to low</option>
                         </select>
                     </div>
