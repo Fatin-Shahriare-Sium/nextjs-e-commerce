@@ -1,0 +1,49 @@
+.user-sidebar{
+    width: 400px;
+    min-height: 90vh;
+    box-shadow: rgb(0 0 0 / 10%) 1px -2px 20px 0px;
+}
+
+
+.user-sidebar__img{
+    display: flex;
+    flex-direction: column;
+    padding-top: 7%;
+}
+.user-sidebar__img button{
+    width: 30%;
+    margin: 1% auto;
+}
+
+.user-sider__tabs{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: 1% auto;
+}
+
+
+/* single tab css */
+
+.tab{
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: 500;
+    width: 70%;
+    padding: 7px;
+    cursor: pointer;
+    margin: 3% auto;
+    transition: all .3s ease;
+}
+.tab:hover{
+    background-color: black;
+    color: white;
+}
+.clicked{
+    background-color:#e0fed8;
+    border-left: 3px solid black;
+}
+.tab > div{
+    margin-left: 5%;
+}
