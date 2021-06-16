@@ -10,8 +10,15 @@ import logout from '../assets/c-door.svg'
 import comment from '../assets/comment.svg'
 import order from '../assets/order.svg'
 import { useState } from 'react'
+import ReactCrop from 'react-image-crop';
+import 'react-image-crop/dist/ReactCrop.css';
 const UserSidebar = () => {
     let [btnValue,setBtnValue]=useState('Account Info')
+    const [crop, setCrop] = useState({
+            unit: 'px',
+            width: '200',
+            height:'130'
+      });
     function handleBtn(value){
         setBtnValue(value)
     }
@@ -29,9 +36,7 @@ const UserSidebar = () => {
                 <UserSingleTab href='/user/order' icon={order} handler={handleBtn} value={btnValue} name={'Your Orders'}/>
                 <UserSingleTab href='/user/changepassword' icon={key} handler={handleBtn} value={btnValue} name={'Change Password'}/>
                 <UserSingleTab href='/user/logout' icon={logout} handler={handleBtn} value={btnValue} name={'logout'}/>
-                
-                
-                
+                <ReactCrop locked={true} src={'https://task-managerx.netlify.app/static/media/important.1ac1dc7b.svg'} crop={crop} onChange={newCrop => setCrop(newCrop)} />
                 
             </div>
         </div>

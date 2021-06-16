@@ -29,13 +29,11 @@ let Hide={
     display:'none '
 }
 let bringTop={
-    marginTop:"9%",
     position:'absolute',
-    top:'-25px',
     marginLeft:"1.5%"
 }
     return (
-        <div style={router.pathname!=='/'?bringTop:{marginTop:"9%"}} className="carosule-container">
+        <div style={router.pathname!=='/'?bringTop:{}} className="carosule-container">
         <div style={!carosuleState.category?Hide:{}} id='carosule-left' className="carosule-left">
            <Category/>
         </div>

@@ -14,24 +14,34 @@ import Navbar from '../component/navbar'
 import Layout from '../component/layout'
 import DataProvider from '../store'
 import {useRouter} from 'next/router'
- 
+import UserSidebar from '../component/user-sidebar.jsx'
 
 
 function  MyApp({ Component, pageProps }) {
     let router=useRouter()
     function render_App(){
-        console.log(router);
-        if(router.asPath=='/user'){
+ 
+        if(router.pathname=='/user'){
             
-            console.log('in user related route');
+  
             return <>
                 <Navbar/>
-                <Component {...pageProps} />
+                <div className='container-fluid' style={{marginTop:'1%',height:'83vh'}}>
+                    <div className='row'>
+                        <div style={{overflowY:'scroll',height:'80vh'}} className='col-md-3  user-sidebar__container'>
+                            <UserSidebar/>
+                        </div>
+                        <div style={{overflowY:'scroll'}} className='col-md-9 user-main'>
+                            <Component {...pageProps} />
+                        </div>
+                    </div>
+                </div>
             </>
 
         }else{
             return <>
                  <Layout>
+                   
                     <Navbar/>
                     <Component {...pageProps} />
                 </Layout>

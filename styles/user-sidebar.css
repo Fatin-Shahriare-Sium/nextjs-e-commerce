@@ -1,7 +1,8 @@
 .user-sidebar{
-    width: 400px;
+    width: 100%;
     min-height: 90vh;
     box-shadow: rgb(0 0 0 / 10%) 1px -2px 20px 0px;
+    margin: 0px auto;
 }
 
 
@@ -47,3 +48,27 @@
 .tab > div{
     margin-left: 5%;
 }
+
+/* user-sidebar container _app.js */
+
+
+  .user-sidebar__container::-webkit-scrollbar {
+    width: 13px;
+  }
+  
+  /* Track */
+  .user-sidebar__container::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 10px;
+  }
+   
+  /* Handle */
+  .user-sidebar__container::-webkit-scrollbar-thumb {
+    background: #6AE23C; 
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  .user-sidebar__container::-webkit-scrollbar-thumb:hover {
+    background: #000000; 
+  }
