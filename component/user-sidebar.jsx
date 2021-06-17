@@ -29,7 +29,7 @@ const UserSidebar = () => {
                 <button className='btn btn-outline-success'>Change Profile Img</button>
             </div>
             <div className="user-sider__tabs">
-                <UserSingleTab href='/user/account' icon={user} handler={handleBtn} value={btnValue} name={'Account Info'}/>
+                <UserSingleTab href='/user/info' icon={user} handler={handleBtn} value={btnValue} name={'Account Info'}/>
                 <UserSingleTab href='/user/address' icon={location} handler={handleBtn} value={btnValue} name='Address'/>
                 <UserSingleTab href='/user/wishlists' icon={love} handler={handleBtn} value={btnValue} name='Your Wishlists'/>
                 <UserSingleTab href='/user/review' icon={comment} handler={handleBtn} value={btnValue} name='Reviews'/>

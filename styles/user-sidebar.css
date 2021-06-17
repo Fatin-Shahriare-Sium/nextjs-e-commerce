@@ -72,3 +72,25 @@
   .user-sidebar__container::-webkit-scrollbar-thumb:hover {
     background: #000000; 
   }
+
+
+  /* user-info user/info */
+
+  .user-info div label{
+    font-size: 2rem;
+    font-weight: 700;
+  }
+  .user-info div p{
+    font-size: 1.7rem;
+  }
+
+
+  /* user-info edit */
+
+  .user-info-edit form label{
+    font-size: 1.7rem;
+    font-weight: 500;
+  }
+  .user-info-edit form input{
+    font-size: 1.5rem;
+  }
