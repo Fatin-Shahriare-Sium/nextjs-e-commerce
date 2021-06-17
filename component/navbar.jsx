@@ -1,6 +1,6 @@
 import search from '../assets/search.svg'
 import cartlogo from '../assets/cart.svg'
-import user from '../assets/user.svg'
+import usericon from '../assets/user.svg'
 import Navbar2 from './navbar2'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import Navbar3 from './navbar3'
@@ -13,7 +13,7 @@ import Navbar_Action from '../store/action/navbarAction'
 
 const Navbar = () => {
     let router=useRouter()
-    let {productState,dispatch}=useData()
+    let {productState,dispatch,auth}=useData()
     let [category,setCategory]=useState(router.pathname!=='/'?false:true)
     let [login,setLogin]=useState(false)
     let cart=productState.controller.cartShow
@@ -54,7 +54,7 @@ const Navbar = () => {
                     <img onClick={toggleCartedOffcanvas} src={cartlogo} alt="" />
                 </div>
                 <div className="navbar-icon--user">
-                    <img onClick={toggleLogin} src={user} alt="" />
+                    <img onClick={toggleLogin} src={auth.user.profilePic?auth.user.profilePic:usericon} alt="" />
                     {renderLoginForm}
                 </div>
             </div>

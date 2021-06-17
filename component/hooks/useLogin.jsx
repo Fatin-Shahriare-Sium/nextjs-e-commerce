@@ -22,7 +22,7 @@ let useLogin=()=>{
             })
         }).then(res=>res.json())
         .then((data)=>{
-            localStorage.setItem('tokenx',data.token)
+                localStorage.setItem('tokenx',data.token)
                 localStorage.setItem('userx',JSON.stringify(data.user))
                 setError({
                     msg:data.msg,

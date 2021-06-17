@@ -36,7 +36,7 @@ const UserSidebar = () => {
                 <UserSingleTab href='/user/order' icon={order} handler={handleBtn} value={btnValue} name={'Your Orders'}/>
                 <UserSingleTab href='/user/changepassword' icon={key} handler={handleBtn} value={btnValue} name={'Change Password'}/>
                 <UserSingleTab href='/user/logout' icon={logout} handler={handleBtn} value={btnValue} name={'logout'}/>
-                <ReactCrop locked={true} src={'https://task-managerx.netlify.app/static/media/important.1ac1dc7b.svg'} crop={crop} onChange={newCrop => setCrop(newCrop)} />
+                {/* <ReactCrop locked={true} src={'https://task-managerx.netlify.app/static/media/important.1ac1dc7b.svg'} crop={crop} onChange={newCrop => setCrop(newCrop)} /> */}
                 
             </div>
         </div>

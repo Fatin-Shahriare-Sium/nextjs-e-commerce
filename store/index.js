@@ -19,7 +19,7 @@ export let useData=()=>{
 
 let DataProvider=({children})=>{
 
-    let[auth,setAuth]=useState({user:typeof window !=='undefined' && localStorage.getItem('userx'), tokenx:typeof window !=='undefined' && localStorage.getItem('tokenx')})
+    let[auth,setAuth]=useState({user:typeof window !=='undefined' && JSON.parse(localStorage.getItem('userx')), tokenx:typeof window !=='undefined' && localStorage.getItem('tokenx')})
     let [state,dispatch]=useReducer(productReducer,inState)
     useEffect(()=>{
      
