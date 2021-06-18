@@ -20,8 +20,8 @@ import UserSidebar from '../component/user-sidebar.jsx'
 function  MyApp({ Component, pageProps }) {
     let router=useRouter()
     function render_App(){
- 
-        if(router.pathname=='/user' || router.pathname=='/user/changepassword' || router.pathname=='/user/info' || router.pathname=='/user/:'){
+        console.log(router);
+        if(router.pathname=='/user' || router.pathname=='/user/changepassword' || router.pathname=='/user/info' || router.pathname==`/user/edit-info/[id]`){
             
   
             return <>
