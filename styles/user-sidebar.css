@@ -94,3 +94,22 @@
   .user-info-edit form input{
     font-size: 1.5rem;
   }
+
+
+  /* user-info address-form  */
+  .address-form form .form-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+  
+  }
+  .address-form form .form-wrapper div{
+    width: 43%;
+    margin: 0px 1%;
+  }
+  .address-form form input{
+    font-size: 1.5rem;
+  }
+  .address-form form label{
+    font-size: 1.7rem;
+    font-weight: 500;
+  }

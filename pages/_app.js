@@ -21,7 +21,7 @@ function  MyApp({ Component, pageProps }) {
     let router=useRouter()
     function render_App(){
         console.log(router);
-        if(router.pathname=='/user' || router.pathname=='/user/changepassword' || router.pathname=='/user/info' || router.pathname==`/user/edit-info/[id]`){
+        if(router.pathname=='/user' || router.pathname=='/user/changepassword' || router.pathname=='/user/info' || router.pathname==`/user/edit-info/[id]` || router.pathname=='/user/address' || router.pathname=='/user/address/create'){
             
   
             return <>
