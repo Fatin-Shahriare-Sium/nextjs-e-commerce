@@ -13,47 +13,47 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import Navbar from '../component/navbar'
 import Layout from '../component/layout'
 import DataProvider from '../store'
-import {useRouter} from 'next/router'
+import { useRouter } from 'next/router'
 import UserSidebar from '../component/user-sidebar.jsx'
 
 
-function  MyApp({ Component, pageProps }) {
-    let router=useRouter()
-    function render_App(){
+function MyApp({ Component, pageProps }) {
+    let router = useRouter()
+    function render_App() {
         console.log(router);
-        if(router.pathname=='/user' || router.pathname=='/user/changepassword' || router.pathname=='/user/info' || router.pathname==`/user/edit-info/[id]` || router.pathname=='/user/address' || router.pathname=='/user/address/create'){
-            
-  
+        if (router.pathname == '/user' || router.pathname == '/user/changepassword' || router.pathname == '/user/info' || router.pathname == `/user/edit-info/[id]` || router.pathname == '/user/address' || router.pathname == '/user/address/create' || router.pathname == '/user/address/edit/[id]') {
+
+
             return <>
-                <Navbar/>
-                <div className='container-fluid' style={{marginTop:'1%',height:'83vh'}}>
+                <Navbar />
+                <div className='container-fluid' style={{ marginTop: '1%', height: '83vh' }}>
                     <div className='row'>
-                        <div style={{overflowY:'scroll',height:'80vh'}} className='col-md-3  user-sidebar__container'>
-                            <UserSidebar/>
+                        <div style={{ overflowY: 'scroll', height: '80vh' }} className='col-md-3  user-sidebar__container'>
+                            <UserSidebar />
                         </div>
-                        <div style={{overflowY:'scroll'}} className='col-md-9 user-main'>
+                        <div style={{ overflowY: 'scroll' }} className='col-md-9 user-main'>
                             <Component {...pageProps} />
                         </div>
                     </div>
                 </div>
             </>
 
-        }else{
+        } else {
             return <>
-                 <Layout>
-                   
-                    <Navbar/>
+                <Layout>
+
+                    <Navbar />
                     <Component {...pageProps} />
                 </Layout>
             </>
         }
     }
-    return(
+    return (
         <DataProvider>
-           {render_App()}
+            {render_App()}
         </DataProvider>
     )
-  
+
 }
 
 export default MyApp;

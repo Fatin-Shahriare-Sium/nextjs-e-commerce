@@ -96,7 +96,7 @@
   }
 
 
-  /* user-info address-form  */
+  /* user address-form  */
   .address-form form .form-wrapper{
     display: flex;
     flex-wrap: wrap;
@@ -111,5 +111,16 @@
   }
   .address-form form label{
     font-size: 1.7rem;
+    font-weight: 500;
+  }
+
+  /* user address-shower[single] */
+
+  .table thead{
+    font-size: 1.9rem;
+    font-weight: 700;
+  }
+  .table td{
+    font-size: 1.3rem;
     font-weight: 500;
   }
