@@ -9,16 +9,16 @@ import location from '../assets/location.svg'
 import logout from '../assets/c-door.svg'
 import comment from '../assets/comment.svg'
 import order from '../assets/order.svg'
-import { useState } from 'react'
-import ReactCrop from 'react-image-crop';
-import 'react-image-crop/dist/ReactCrop.css';
+import { useState, useCallback } from 'react'
+import Cropper from 'react-easy-crop'
 const UserSidebar = () => {
     let [btnValue, setBtnValue] = useState('Account Info')
-    const [crop, setCrop] = useState({
-        unit: 'px',
-        width: '200',
-        height: '130'
-    });
+    const [crop, setCrop] = useState({ x: 0, y: 0 })
+    const [zoom, setZoom] = useState(1)
+
+    const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
+        console.log(croppedArea, croppedAreaPixels)
+    }, [])
     function handleBtn(value) {
         setBtnValue(value)
     }
@@ -29,6 +29,15 @@ const UserSidebar = () => {
                 <button className='btn btn-outline-success'>Change Profile Img</button>
             </div>
             <div className="user-sider__tabs">
+                <Cropper
+                    image='https://res.cloudinary.com/sium/image/upload/v1620120507/gx8roato9pjwmbjzxbfa.jpg'
+                    crop={crop}
+                    zoom={zoom}
+                    aspect={10 / 3}
+                    onCropChange={setCrop}
+                    onCropComplete={onCropComplete}
+                    onZoomChange={setZoom}
+                />
                 <UserSingleTab href='/user/info' icon={user} handler={handleBtn} value={btnValue} name={'Account Info'} />
                 <UserSingleTab href='/user/address' icon={location} handler={handleBtn} value={btnValue} name='Address' />
                 <UserSingleTab href='/user/wishlist' icon={love} handler={handleBtn} value={btnValue} name='Your Wishlists' />
@@ -36,7 +45,7 @@ const UserSidebar = () => {
                 <UserSingleTab href='/user/order' icon={order} handler={handleBtn} value={btnValue} name={'Your Orders'} />
                 <UserSingleTab href='/user/changepassword' icon={key} handler={handleBtn} value={btnValue} name={'Change Password'} />
                 <UserSingleTab href='/user/logout' icon={logout} handler={handleBtn} value={btnValue} name={'logout'} />
-                {/* <ReactCrop locked={true} src={'https://task-managerx.netlify.app/static/media/important.1ac1dc7b.svg'} crop={crop} onChange={newCrop => setCrop(newCrop)} /> */}
+
 
             </div>
         </div>
