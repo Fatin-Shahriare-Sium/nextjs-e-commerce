@@ -29,15 +29,6 @@ const UserSidebar = () => {
                 <button className='btn btn-outline-success'>Change Profile Img</button>
             </div>
             <div className="user-sider__tabs">
-                <Cropper
-                    image='https://res.cloudinary.com/sium/image/upload/v1620120507/gx8roato9pjwmbjzxbfa.jpg'
-                    crop={crop}
-                    zoom={zoom}
-                    aspect={10 / 3}
-                    onCropChange={setCrop}
-                    onCropComplete={onCropComplete}
-                    onZoomChange={setZoom}
-                />
                 <UserSingleTab href='/user/info' icon={user} handler={handleBtn} value={btnValue} name={'Account Info'} />
                 <UserSingleTab href='/user/address' icon={location} handler={handleBtn} value={btnValue} name='Address' />
                 <UserSingleTab href='/user/wishlist' icon={love} handler={handleBtn} value={btnValue} name='Your Wishlists' />
