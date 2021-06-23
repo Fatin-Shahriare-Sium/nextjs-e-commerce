@@ -124,3 +124,10 @@
     font-size: 1.3rem;
     font-weight: 500;
   }
+
+  /* /checkout step progress bar */
+
+  .step-container{
+    margin-top: 3%;
+    min-height: 50vh;
+  }
