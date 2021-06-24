@@ -1,3 +1,8 @@
+.step-progressbar{
+    width: 97%;
+    margin: 1% auto;
+}
+
 .step-progressbar__container{
     display: flex;
     align-items: center;
@@ -11,7 +16,7 @@
     
 }
 .progressbar{
-    background-color: rgb(238, 0, 0);
+    background-color: #000000;
     width: 100%;
     color: black;
     height: 1vh;
@@ -30,18 +35,15 @@
     z-index: -3;
     left: 0;
 }
-/* .progressbar::before{
-    content:'';
-    background-color: red;
-    width: 100%!important;;
-    color: black;
-    height: 1vh;
-    position: absolute;
-    left: 0;
-} */
-.progress-content{
+
+.progress-logo{
     border: 5px solid rgb(161, 161, 167);
-    padding: 7px 17px;
+    padding: 7px 11px;
     border-radius: 50%;
     background-color: white;
+}
+.step-progressbar__content{
+
+    margin-top: 1.7%;
+    min-height: 53vh;
 }
