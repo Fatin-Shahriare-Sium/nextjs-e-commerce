@@ -1,0 +1,47 @@
+.step-progressbar__container{
+    display: flex;
+    align-items: center;
+    width: 80%;
+    justify-content: space-between;
+    font-size: 2rem;
+    position: relative;
+    color: black;
+    z-index: 1;
+    margin: 0px auto;
+    
+}
+.progressbar{
+    background-color: rgb(238, 0, 0);
+    width: 100%;
+    color: black;
+    height: 1vh;
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    transition: width .3s ease;
+
+}
+.fake-progressbar{
+    background-color: rgb(148, 141, 141);
+    width: 100%;
+    color: black;
+    height: 1vh;
+    position: absolute;
+    z-index: -3;
+    left: 0;
+}
+/* .progressbar::before{
+    content:'';
+    background-color: red;
+    width: 100%!important;;
+    color: black;
+    height: 1vh;
+    position: absolute;
+    left: 0;
+} */
+.progress-content{
+    border: 5px solid rgb(161, 161, 167);
+    padding: 7px 17px;
+    border-radius: 50%;
+    background-color: white;
+}

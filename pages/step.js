@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import Step from '../component/step'
+import Step from '../component/step-bar'
 import AddressSelector from '../component/address-selector'
 import useUrl from '../component/hooks/useUrl'
 import Link from 'next/link.js'
 import { useData } from '../store'
-import StepProgressBar from 'react-step-progress';
 // import the stylesheet
 import 'react-step-progress/dist/index.css';
 import OrderSummery from '../component/order-summery'
+import StepBar from '../component/step-bar'
 const StepIndex = () => {
     let { url } = useUrl()
     let { auth } = useData()
@@ -45,6 +45,7 @@ const StepIndex = () => {
     }
     return (
         <div>
+            <StepBar />
             <OrderSummery />
             {
                 radio && AddressComponent()
