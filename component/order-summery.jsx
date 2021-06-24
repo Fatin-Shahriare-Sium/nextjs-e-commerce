@@ -12,11 +12,14 @@ const OrderSummery = () => {
             preTotal += realPrice(sig.price, sig.priceOff, sig.qty)
         })
         setTotal(preTotal)
+        localStorage.setItem('totalAmount', preTotal + 10)
     }, [JSON.stringify(productState.carted)])
     function realPrice(price, priceOff, qty) {
         let percentage = price * priceOff / 100
         let preReal = price - percentage
+
         return preReal * qty
+
     }
     return (
         <div className='shadow-lg' style={{ padding: '7px', minHeight: '37vh' }}>

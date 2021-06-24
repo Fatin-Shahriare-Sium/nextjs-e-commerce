@@ -14,11 +14,14 @@ import PaymentController from '../component/payment-controller'
 
 const StepIndex = () => {
     let { url } = useUrl()
-    let { auth } = useData()
+    let { auth, productState } = useData()
     let [allAddress, setAlladdress] = useState()
     let [radio, setRadio] = useState()
     let [step, setStep] = useState(0)
+    let [paymentMethod, setpaymentMethod] = useState()
     let [addressId, setAddressId] = useState()
+    let [tnxId, setTnxId] = useState()
+    let [modal, setModal] = useState(false)
     useEffect(() => {
         fetch(`${url}/address/all/${auth.user._id}`, {
             method: 'GET'
@@ -48,6 +51,7 @@ const StepIndex = () => {
             return { width: '0%' }
         }
     }
+
     function AddressComponent() {
         return <div style={{ display: 'flex', flexWrap: 'wrap', flexDirection: 'row', alignItems: 'center' }}>
             {allAddress.map((sig, index) => <AddressSelector handle={handleRadio} id={sig._id} key={index} index={index} radio={radio} name={sig.name} email={sig.email} country={sig.country} city={sig.city} streetAddress={sig.streetAddress} code={sig.postalCode} />)}
@@ -57,14 +61,19 @@ const StepIndex = () => {
         </div>
     }
 
+    function handlePaymentMethod(type) {
+        setpaymentMethod(type)
+    }
+
     function renderContent() {
         if (step == 0) {
             return radio && AddressComponent()
 
         } else if (step == 1) {
-            return <PaymentController />
+            return <PaymentController handlePaymentMethod={handlePaymentMethod} />
         }
     }
+
     function cardPayment() {
         let payBtn = document.getElementById('pay-btn')
         payBtn.click()
@@ -72,11 +81,91 @@ const StepIndex = () => {
 
 
     }
+
+    function toggleModal() {
+        setModal(pre => !pre)
+    }
+
     function handleNext() {
         if (step == 0) {
             setStep(pre => pre + 1)
-        } else {
+        } else if (paymentMethod == 'card') {
             cardPayment()
+        } else if (paymentMethod == 'bkash') {
+            setModal(true)
+        } else if (paymentMethod == 'nagad') {
+            setModal(true)
+        }
+
+
+    }
+
+    function handleBack() {
+        if (step == 0) {
+            return
+        } else {
+            return setStep(pre => pre - 1)
+        }
+    }
+    function handleBkashPayment() {
+
+        if (tnxId) {
+
+            fetch(`${url}/order/create`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    type: 'bkash',
+                    product: productState.carted,
+                    totalAmount: localStorage.getItem('totalAmount'),
+                    addressId: addressId,
+                    user: auth.user,
+                    bkashTnxId: tnxId,
+                    nagadTnxId: ''
+                })
+            }).then(res => res.json())
+                .then(data => {
+                    if (data.msg == 'success') {
+                        setTnxId('')
+                        toggleModal()
+                        return setStep(2)
+                    }
+                })
+
+        } else {
+
+        }
+    }
+
+    function handleNagadPayment() {
+
+        if (tnxId) {
+            fetch(`${url}/order/create`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    type: 'nagad',
+                    product: productState.carted,
+                    totalAmount: localStorage.getItem('totalAmount'),
+                    addressId: addressId,
+                    user: auth.user,
+                    bkashTnxId: '',
+                    nagadTnxId: tnxId
+                })
+            }).then(res => res.json())
+                .then(data => {
+                    if (data.msg == 'success') {
+                        setTnxId('')
+                        toggleModal()
+                        return setStep(2)
+                    }
+                })
+        } else {
+
         }
 
 
@@ -98,13 +187,36 @@ const StepIndex = () => {
                 <div className="fake-progressbar" id='progress'></div>
             </div>
             <div className="step-progressbar__content container-fluid">
+                {/* Modal start */}
+
+
+                <div class={modal ? 'modal fade show' : 'modal fade'} style={modal ? { display: 'block' } : { display: 'none' }}>
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">{paymentMethod == 'bkash' ? 'Bkash' : 'Nagad'}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" onClick={toggleModal} aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p style={{ fontSize: '1.7rem', fontWeight: '500' }}>Please,send money to 018723e92832 this number.Then,put your tnxId here.we will check it soon</p>
+                                <input style={{ width: '90%', margin: '0px auto' }} onChange={paymentMethod == 'bkash' ? (event) => setTnxId(event.target.value) : (event) => setTnxId(event.target.value)} placeholder='tnxId' />
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" onClick={paymentMethod == 'bkash' ? handleBkashPayment : handleNagadPayment} class="btn btn-primary">Done</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                {/* Modal end */}
                 <div className="row">
                     <div className="col-md-7">
                         <div>
                             {renderContent()}
                         </div>
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '93%', margin: '1% auto' }}>
-                            <button style={{ fontSize: '1.3rem' }} className='btn btn-outline-dark'>Back</button>
+                            <button style={{ fontSize: '1.3rem' }} onClick={handleBack} className='btn btn-outline-dark'>Back</button>
                             <button style={{ fontSize: '1.3rem' }} onClick={handleNext} className='btn btn-outline-success' >{step == 1 ? 'Pay' : 'Next'}</button>
                         </div>
                     </div>
