@@ -4,6 +4,7 @@ import Cart from './cart'
 import Dollar from './dollar'
 import StripeCheckout from 'react-stripe-checkout';
 import useUrl from './hooks/useUrl';
+import Link from 'next/link.js';
 const CartedOffcanvas = ({ show, offcanvasHandler, carted }) => {
     let [total, setTotal] = useState()
     let { url } = useUrl()
@@ -18,22 +19,6 @@ const CartedOffcanvas = ({ show, offcanvasHandler, carted }) => {
         setTotal(subTotal)
     }, [JSON.stringify(carted)])
 
-    function handleToken(token) {
-        console.log(token);
-        fetch(`${url}/payment`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                token,
-                product: carted
-            })
-        }).then(res => res.json())
-            .then(data => {
-                console.log(data)
-            })
-    }
     return (
         <div className='offcanvas-wrapper'>
             <div class={show ? 'offcanvas offcanvas-end show ' : 'offcanvas offcanvas-end'}>
@@ -49,16 +34,9 @@ const CartedOffcanvas = ({ show, offcanvasHandler, carted }) => {
                         <p className='cart-subtotal'>{`Subtotal : $${total}`}</p>
                         <p>{`Shipping fee :$${10}`}</p>
                         <p>{`Total :$${total + 10}`}</p>
-
-                        <StripeCheckout token={handleToken}
-                            panelLabel="Give Money" // prepended to the amount in the bottom pay button
-                            amount={`${(total + 10) * 100}`}// cents
-                            currency="USD"
-                            shippingAddress={false}
-                            billingAddress
-                            stripeKey='pk_test_51J4rHMFpIjqeQSow0hRReErJ6IjCcDrKBAqUeZbG4gBq0EAejjbE4zoIU8IkZg9xRsjT7vYSw2GSXmRpOcAjRNN600zR45r8tP' >
-                            <button className='btn btn-outline-success shadow w-100'>Procced to Checkout</button>
-                        </StripeCheckout>
+                        <Link href='/checkout' >
+                            <button onClick={offcanvasHandler} className='btn btn-outline-success shadow w-100'>Procced to Checkout</button>
+                        </Link>
                     </div>
                     <p>#allahisalmighty</p>
                 </div>

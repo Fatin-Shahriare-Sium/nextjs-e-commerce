@@ -53,12 +53,15 @@ const StepIndex = () => {
     }
 
     function AddressComponent() {
-        return <div style={{ display: 'flex', flexWrap: 'wrap', flexDirection: 'row', alignItems: 'center' }}>
-            {allAddress.map((sig, index) => <AddressSelector handle={handleRadio} id={sig._id} key={index} index={index} radio={radio} name={sig.name} email={sig.email} country={sig.country} city={sig.city} streetAddress={sig.streetAddress} code={sig.postalCode} />)}
-            <Link href='user/address/create'>
-                <button className='btn btn-outline-success'>Add Shipping Address</button>
-            </Link>
-        </div>
+        return <>
+            <p style={{ fontSize: '2rem', fontWeight: '700', textDecoration: 'underline' }}>Select your shipping address</p>
+            <div style={{ display: 'flex', flexWrap: 'wrap', flexDirection: 'row', alignItems: 'center' }}>
+                {allAddress.map((sig, index) => <AddressSelector handle={handleRadio} id={sig._id} key={index} index={index} radio={radio} name={sig.name} email={sig.email} country={sig.country} city={sig.city} streetAddress={sig.streetAddress} code={sig.postalCode} />)}
+                <Link href='user/address/create'>
+                    <button className='btn btn-outline-success'>Add Shipping Address</button>
+                </Link>
+            </div>
+        </>
     }
 
     function handlePaymentMethod(type) {
@@ -107,6 +110,8 @@ const StepIndex = () => {
             return setStep(pre => pre - 1)
         }
     }
+
+    // handleBkashPayment
     function handleBkashPayment() {
 
         if (tnxId) {
@@ -139,6 +144,12 @@ const StepIndex = () => {
         }
     }
 
+    // end handleBkashPayment
+
+
+    //handleNagadPayment
+
+
     function handleNagadPayment() {
 
         if (tnxId) {
@@ -170,6 +181,8 @@ const StepIndex = () => {
 
 
     }
+
+    //end handleNagadPayment
     return (
 
         <div className='step-progressbar'>
