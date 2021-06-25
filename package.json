@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "bootstrap": "^5.0.1",
+    "moment": "^2.29.1",
     "next": "10.2.3",
     "next-auth": "^3.25.0",
     "next-images": "^1.7.0",
