@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import StripeCheckout from 'react-stripe-checkout';
 import { useData } from '../store';
-const PaymentController = ({ handlePaymentMethod, addressId }) => {
+import useUrl from './hooks/useUrl.jsx'
+const PaymentController = ({ handlePaymentMethod, addressId,success }) => {
     let { auth, productState } = useData()
+    let {url}=useUrl()
     let [radio, setRadio] = useState(new Array(3).fill(false))
     function handleRadio(index) {
         let radioState = new Array(3).fill(false)
@@ -55,9 +57,10 @@ const PaymentController = ({ handlePaymentMethod, addressId }) => {
                 < StripeCheckout
                     token={(token) => handleToken(token, addressId)}
                     panelLabel="Give Money" // prepended to the amount in the bottom pay button
-                    amount='100000'
+                    amount={localStorage.getItem('totalAmount')*100}
                     currency="USD"
                     billingAddress={true}
+                    closed={success}
                     stripeKey='pk_test_51J4rHMFpIjqeQSow0hRReErJ6IjCcDrKBAqUeZbG4gBq0EAejjbE4zoIU8IkZg9xRsjT7vYSw2GSXmRpOcAjRNN600zR45r8tP'
                 >
 

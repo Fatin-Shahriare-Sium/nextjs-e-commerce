@@ -73,7 +73,11 @@ const StepIndex = () => {
             return radio && AddressComponent()
 
         } else if (step == 1) {
-            return <PaymentController handlePaymentMethod={handlePaymentMethod} />
+            return <PaymentController success={showSuccessComponenet} handlePaymentMethod={handlePaymentMethod} addressId={addressId}/>
+        }else if(step==2){
+            return <div style={{minHeigth:'47vh'}}>
+                <p className='success-text'>Thanks for placing order.We are verifing your payment status.Then,we will process your order,inshallah</p>
+            </div>
         }
     }
 
@@ -90,7 +94,7 @@ const StepIndex = () => {
     }
 
     function handleNext() {
-        if (step == 0) {
+        if (step == 0 && addressId) {
             setStep(pre => pre + 1)
         } else if (paymentMethod == 'card') {
             cardPayment()
@@ -183,6 +187,12 @@ const StepIndex = () => {
     }
 
     //end handleNagadPayment
+
+    //show-success component
+
+    function showSuccessComponenet(){
+        setStep(2)
+    }
     return (
 
         <div className='step-progressbar'>
@@ -228,9 +238,14 @@ const StepIndex = () => {
                         <div>
                             {renderContent()}
                         </div>
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '93%', margin: '1% auto' }}>
+                        <div style={step==2?{display:'none'}:{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '93%', margin: '1% auto' }}>
                             <button style={{ fontSize: '1.3rem' }} onClick={handleBack} className='btn btn-outline-dark'>Back</button>
                             <button style={{ fontSize: '1.3rem' }} onClick={handleNext} className='btn btn-outline-success' >{step == 1 ? 'Pay' : 'Next'}</button>
+                        </div>
+                        <div style={step==2?{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '93%', margin: '1% auto' }:{display:'none'}}>
+                             <Link href='/'>
+                             <button style={{ fontSize: '1.3rem' }} className='btn btn-outline-primary'>Shop More</button>
+                             </Link>
                         </div>
                     </div>
                     <div style={{ order: '1' }} className='col-md-4'>

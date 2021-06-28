@@ -5,6 +5,7 @@ import { useData } from '../store';
 import SingleOrderSummery from '../component/single-order-summery';
 import SingleOrderProduct from '../component/single-order-product';
 import SingleOrderTimeline from '../component/single-order-timeline';
+import SingleOrderShippingAddress from '../component/single-order-shippingAddress.jsx';
 const OrderDetails = () => {
     let { auth } = useData()
     let { url } = useUrl()
@@ -30,14 +31,15 @@ const OrderDetails = () => {
     return (
         <div className='order-details__container container-fluid mt-3'>
             <div className='row'>
-                <div style={{ overflowY: 'scroll', borderRight: '2px solid red', height: '83vh' }} className='order-details__sidebar col-md-3'>
+                <div style={{ overflowY: 'auto', borderRight: '2px solid red', height: '83vh' }} className='order-details__sidebar col-md-3'>
                     {orders.map(sig => <SingleOrderSidebar id={sig._id} date={sig.createdAt} totalAmount={sig.totalAmount} selectedId={selectedId} handleSelector={handleSelectedId} paymentStatus={sig.paymentStatus} orderStatus={sig.orderStatus} />)}
                 </div>
-                <div style={{ overflowY: 'scroll', height: '83vh' }} className='order-details__shower col-md-9'>
+                <div style={{ overflowY: 'auto', height: '83vh' }} className='order-details__shower col-md-9'>
+                 {selectedOrder && <SingleOrderShippingAddress address={selectedOrder.address} />}
                     {selectedOrder && < SingleOrderSummery order={selectedOrder} />}
                     {selectedOrder && <SingleOrderProduct orderedProduct={selectedOrder.product} paymentStatus={selectedOrder.paymentStatus} totalAmount={selectedOrder.totalAmount} />}
 
-                    <SingleOrderTimeline />
+                   {selectedOrder &&  <SingleOrderTimeline orderTimeline={selectedOrder.orderTimeline} />}
                     <div style={{ height: '10vh' }}>
 
                     </div>
