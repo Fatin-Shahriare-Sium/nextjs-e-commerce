@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import location from '../assets/location.svg'
 import payment from '../assets/payment.svg'
 import complete from '../assets/tick.svg'
-
+import cartLogo from '../assets/cart-btn.svg'
 import AddressSelector from '../component/address-selector'
 import useUrl from '../component/hooks/useUrl'
 import Link from 'next/link.js'
@@ -10,6 +10,7 @@ import { useData } from '../store'
 // import the stylesheet
 import 'react-step-progress/dist/index.css';
 import OrderSummery from '../component/order-summery'
+import CartedProductShower from '../component/carted-product-shower'
 import PaymentController from '../component/payment-controller'
 
 const StepIndex = () => {
@@ -44,8 +45,12 @@ const StepIndex = () => {
 
     function stepIncreaser() {
         if (step == 1) {
-            return { width: '50%' }
+            return { width: '33%' }
         } else if (step == 2) {
+            return { width: '66%' }
+        } else if (step == 3) {
+            return { width: '99%' }
+        } else if (step == 4) {
             return { width: '100%' }
         } else {
             return { width: '0%' }
@@ -70,12 +75,14 @@ const StepIndex = () => {
 
     function renderContent() {
         if (step == 0) {
+            return <CartedProductShower />
+        } else if (step == 1) {
             return radio && AddressComponent()
 
-        } else if (step == 1) {
-            return <PaymentController success={showSuccessComponenet} handlePaymentMethod={handlePaymentMethod} addressId={addressId}/>
-        }else if(step==2){
-            return <div style={{minHeigth:'47vh'}}>
+        } else if (step == 2) {
+            return <PaymentController success={showSuccessComponenet} handlePaymentMethod={handlePaymentMethod} addressId={addressId} />
+        } else if (step == 3) {
+            return <div style={{ minHeight: '33vh', textAlign: 'center', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <p className='success-text'>Thanks for placing order.We are verifing your payment status.Then,we will process your order,inshallah</p>
             </div>
         }
@@ -94,7 +101,9 @@ const StepIndex = () => {
     }
 
     function handleNext() {
-        if (step == 0 && addressId) {
+        if (step == 0) {
+            setStep(pre => pre + 1)
+        } else if (step == 1 && addressId) {
             setStep(pre => pre + 1)
         } else if (paymentMethod == 'card') {
             cardPayment()
@@ -139,7 +148,7 @@ const StepIndex = () => {
                     if (data.msg == 'success') {
                         setTnxId('')
                         toggleModal()
-                        return setStep(2)
+                        return setStep(3)
                     }
                 })
 
@@ -176,7 +185,7 @@ const StepIndex = () => {
                     if (data.msg == 'success') {
                         setTnxId('')
                         toggleModal()
-                        return setStep(2)
+                        return setStep(3)
                     }
                 })
         } else {
@@ -190,8 +199,8 @@ const StepIndex = () => {
 
     //show-success component
 
-    function showSuccessComponenet(){
-        setStep(2)
+    function showSuccessComponenet() {
+        setStep(3)
     }
     return (
 
@@ -199,12 +208,15 @@ const StepIndex = () => {
             <div className="step-progressbar__container">
                 <div style={stepIncreaser()} className="progressbar" id='progress'></div>
                 <div style={step >= 0 ? { border: '5px solid #018FF4' } : {}} className="progress-logo">
-                    <img src={location} alt="" />
+                    <img src={cartLogo} alt="" />
                 </div>
                 <div style={step >= 1 ? { border: '5px solid #018FF4' } : {}} className="progress-logo">
-                    <img src={payment} alt="" />
+                    <img src={location} alt="" />
                 </div>
                 <div style={step >= 2 ? { border: '5px solid #018FF4' } : {}} className="progress-logo">
+                    <img src={payment} alt="" />
+                </div>
+                <div style={step >= 3 ? { border: '5px solid #018FF4' } : {}} className="progress-logo">
                     <img src={complete} alt="" />
                 </div>
                 <div className="fake-progressbar" id='progress'></div>
@@ -238,14 +250,14 @@ const StepIndex = () => {
                         <div>
                             {renderContent()}
                         </div>
-                        <div style={step==2?{display:'none'}:{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '93%', margin: '1% auto' }}>
+                        <div style={step == 3 ? { display: 'none' } : { display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '93%', margin: '1% auto' }}>
                             <button style={{ fontSize: '1.3rem' }} onClick={handleBack} className='btn btn-outline-dark'>Back</button>
-                            <button style={{ fontSize: '1.3rem' }} onClick={handleNext} className='btn btn-outline-success' >{step == 1 ? 'Pay' : 'Next'}</button>
+                            <button style={{ fontSize: '1.3rem' }} onClick={handleNext} className='btn btn-outline-success' >{step == 2 ? 'Pay' : 'Next'}</button>
                         </div>
-                        <div style={step==2?{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '93%', margin: '1% auto' }:{display:'none'}}>
-                             <Link href='/'>
-                             <button style={{ fontSize: '1.3rem' }} className='btn btn-outline-primary'>Shop More</button>
-                             </Link>
+                        <div style={step == 3 ? { display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '93%', margin: '1% auto' } : { display: 'none' }}>
+                            <Link href='/'>
+                                <button style={{ fontSize: '1.3rem' }} className='btn btn-outline-primary'>Shop More</button>
+                            </Link>
                         </div>
                     </div>
                     <div style={{ order: '1' }} className='col-md-4'>

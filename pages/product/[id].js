@@ -13,7 +13,7 @@ import Navbar3 from '../../component/navbar3';
 import love from '../../assets/love.svg';
 import filllove from '../../assets/love-fill.svg'
 import { useRouter } from 'next/router.js'
-
+import Link from 'next/link.js'
 
 
 export async function getServerSideProps({ params }) {
@@ -114,13 +114,15 @@ const SingleProduct = ({ product }) => {
                             </select>
                         </div>
                         <div className='single-product-btn'>
-                            <div onClick={() => dispatch({ type: Product_Action.ADD_CART, payload: { id: product._id, qty: qtyx } })} className='single-product-btn--cart'>
+                            <div onClick={() => dispatch({ type: Product_Action.ADD_CART, payload: { id: product._id, qty: qtyx, showCart: true } })} className='single-product-btn--cart'>
                                 <img src={cartBtn} />
                                 <p>Add to Cart</p>
                             </div>
-                            <div className='single-product-btn--buy'>
-                                <p>Buy Now</p>
-                            </div>
+                            <Link href='/checkout'>
+                                <div onClick={() => dispatch({ type: Product_Action.ADD_CART, payload: { id: product._id, qty: qtyx, showCart: false } })} className='single-product-btn--buy'>
+                                    <p>Buy Now</p>
+                                </div>
+                            </Link>
                         </div>
                         <div className='single-product-social'>
                             <a href='/'> <FacebookIcon size={37} round={true} /> </a>
