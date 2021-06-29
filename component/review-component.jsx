@@ -4,7 +4,8 @@ import usericon from '../assets/user.svg'
 import starfill from '../assets/star-fill.svg'
 import { useData } from '../store'
 import useUrl from './hooks/useUrl'
-const ReviewComponent = ({ staticx, ratingObj, productId }) => {
+import moment from 'moment'
+const ReviewComponent = ({ staticx, ratingObj, productId, autoRefresher }) => {
     let [starx, setStarx] = useState(new Array(5).fill(false))
     let [comment, setComment] = useState('')
     let [reviewUser, setReviewUser] = useState({ name: '', time: '' })
@@ -52,29 +53,36 @@ const ReviewComponent = ({ staticx, ratingObj, productId }) => {
             })
         }).then(res => res.json())
             .then(data => {
-                console.log(data);
+                autoRefresher()
+                setStarx(new Array(5).fill(false))
+                setComment('')
             })
     }
+    let REVIEW_WRAPPER_STYLE = {
+        display: 'flex',
+        alignItems: 'center',
+
+    }
     return (
-        <div style={{ display: 'flex', alignItems: 'center' }} className='review-wrapper'>
+        <div style={staticx ? { ...REVIEW_WRAPPER_STYLE, boxShadow: 'rgb(0 0 0 / 10%) -1px 4px 20px 20px' } : REVIEW_WRAPPER_STYLE} className='review-wrapper'>
 
             <div className='review-user'>
                 <img src={auth.user.profilePic == '' ? usericon : auth.user.profilePi} alt="" />
             </div>
-            <div className='review-box ms-3'>
+            <div className='review-box ms-5'>
                 {
                     staticx && <div className="review-user__info">
-                        <p>{reviewUser.name}. {reviewUser.time}</p>
+                        <p style={{ fontSize: '1.3rem', fontWeight: '700' }}>{reviewUser.name}. {moment(reviewUser.time).fromNow()}</p>
                     </div>
                 }
                 <div style={{ display: 'flex', alignItems: "center", justifyContent: 'space-between', width: '213px' }} className='star-container'>
                     {starx.map((sig, index) => <div>
-                        <img onClick={() => handleStar(index)} style={{ width: '20px', height: '30px' }} src={starx[index] ? starfill : star} alt='' />
+                        <img onClick={staticx ? () => { } : () => handleStar(index)} style={{ width: '20px', height: '30px', objectFit: 'contain' }} src={starx[index] ? starfill : star} alt='' />
                     </div>)}
                 </div>
-                <div className="comment-box mt-3">
+                <div style={{ width: '97%' }} className="comment-box mt-3 ">
                     {
-                        staticx ? <p>{comment}</p> : <input onChange={(event) => setComment(event.target.value)} value={comment} placeholder='write your review' style={{ width: '100%' }} />
+                        staticx ? <p style={{ fontSize: '1.5rem', fontWeight: '500', wordBreak: 'break-word' }}>{comment}</p> : <input onChange={(event) => setComment(event.target.value)} value={comment} placeholder='write your review' style={{ width: '100%', fontSize: '1.3rem' }} />
                     }
                 </div>
                 {

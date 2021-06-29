@@ -55,7 +55,7 @@ const Navbar = () => {
                             <img onClick={toggleCartedOffcanvas} src={cartlogo} alt="" />
                         </div>
                         {
-                            auth.user ? <Link href='/user'>
+                            auth.user ? <Link href='/user/info'>
                                 <div className="navbar-icon--user">
 
                                     <img src={auth.user.profilePic == '' ? usericon : auth.user.profilePic} alt="" />

@@ -152,10 +152,19 @@
     min-height: 80vh;
     margin-top: 5%;
 }
-
+/* review component css */
+.review-wrapper{
+    width: 500px;
+    padding: 7px;
+    margin-top: 1%;
+}
 @media screen and (max-width:800px) {
     .single-product__header{
         flex-direction: column;
+    }
+    .review-wrapper{
+        width: 90%;
+        margin: 1% auto;
     }
 }
 @-moz-document url-prefix() {

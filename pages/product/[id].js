@@ -61,15 +61,16 @@ const SingleProduct = ({ product }) => {
 
     useEffect(() => {
         console.log('fetch review usestate');
-        // if (fetchReview) {
-        //     fetch(`${url}/review/find?productId=${router.query.id}`, {
-        //         method: 'GET'
-        //     }).then(res => res.json())
-        //         .then(data => {
-        //             console.log(data);
-        //             setProductReview(data.allReviews)
-        //         })
-        // }
+        if (fetchReview) {
+            fetch(`${url}/review/find?productId=${router.query.id}`, {
+                method: 'GET'
+            }).then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    setProductReview(data.allReviews)
+                    setFetchReview(false)
+                })
+        }
     }, [fetchReview])
 
     if (process.browser) {
@@ -174,7 +175,8 @@ const SingleProduct = ({ product }) => {
                         {
                             btnValue == 'des' ? <p dangerouslySetInnerHTML={{ __html: product.description }}></p> :
                                 <div >
-                                    <ReviewComponent staticx={false} productId={router.query.id} />
+                                    <ReviewComponent autoRefresher={handleReviewTab} staticx={false} productId={router.query.id} />
+                                    <hr />
                                     {
                                         productReview ? productReview.map((sig, index) => <ReviewComponent staticx={true} ratingObj={sig} />) : <Loading />
                                     }
