@@ -6,6 +6,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import Navbar3 from './navbar3'
 import { useRouter } from 'next/router'
 import Login from './login'
+import Link from 'next/link'
 import CartedOffcanvas from './carted-offcanvas'
 import { useData } from '../store'
 import Navbar_Action from '../store/action/navbarAction'
@@ -53,10 +54,18 @@ const Navbar = () => {
                         <div data-length={productState.carted.length} className="navbar-icon--cart">
                             <img onClick={toggleCartedOffcanvas} src={cartlogo} alt="" />
                         </div>
-                        <div className="navbar-icon--user">
-                            <img onClick={toggleLogin} src={auth.user ? auth.user.profilePic : usericon} alt="" />
-                            {renderLoginForm}
-                        </div>
+                        {
+                            auth.user ? <Link href='/user'>
+                                <div className="navbar-icon--user">
+
+                                    <img src={auth.user.profilePic == '' ? usericon : auth.user.profilePic} alt="" />
+
+                                </div>
+                            </Link> : <div className="navbar-icon--user">
+                                <img onClick={toggleLogin} src={usericon} alt="" />
+                                {renderLoginForm}
+                            </div>
+                        }
                     </div>
                 </div>
                 <Navbar2 handleCategory={toggleCategory} />

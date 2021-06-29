@@ -14,6 +14,8 @@ import love from '../../assets/love.svg';
 import filllove from '../../assets/love-fill.svg'
 import { useRouter } from 'next/router.js'
 import Link from 'next/link.js'
+import ReviewComponent from '../../component/review-component';
+import Loading from '../../component/loading';
 
 
 export async function getServerSideProps({ params }) {
@@ -33,6 +35,8 @@ const SingleProduct = ({ product }) => {
     let router = useRouter()
     let [btnValue, setBtnValue] = useState('des')
     let [wish, setWish] = useState(false)
+    let [fetchReview, setFetchReview] = useState(false)
+    let [productReview, setProductReview] = useState()
     useEffect(async () => {
         if (productState.products.length <= 0) {
             let res = await fetch(`${url}/product/all`)
@@ -41,15 +45,33 @@ const SingleProduct = ({ product }) => {
         }
 
         if (auth.user) {
+            //for fetch wishlist
             fetch(`${url}/user/wishlist/check?userId=${auth.user._id}&productId=${router.query.id}`, {
                 method: 'GET'
             }).then(res => res.json())
                 .then(data => {
                     setWish(data.fill)
                 })
+
+
         }
 
     }, [])
+
+
+    useEffect(() => {
+        console.log('fetch review usestate');
+        // if (fetchReview) {
+        //     fetch(`${url}/review/find?productId=${router.query.id}`, {
+        //         method: 'GET'
+        //     }).then(res => res.json())
+        //         .then(data => {
+        //             console.log(data);
+        //             setProductReview(data.allReviews)
+        //         })
+        // }
+    }, [fetchReview])
+
     if (process.browser) {
         window.onbeforeunload = () => {
             // your callback
@@ -84,6 +106,12 @@ const SingleProduct = ({ product }) => {
             .then(data => {
 
             })
+    }
+    //handleReviewTab
+    let handleReviewTab = () => {
+        setBtnValue('review')
+        console.log('handleReviewTab');
+        setFetchReview(true)
     }
     return (
         <>
@@ -140,10 +168,18 @@ const SingleProduct = ({ product }) => {
                 <div className='single-product__body'>
                     <div className='single-product__body--header'>
                         <button onClick={() => setBtnValue('des')} className={btnValue == 'des' ? 'btn btn-dark' : 'btn btn-outline-dark'}>Description</button>
-                        <button onClick={() => setBtnValue('review')} className={btnValue == 'review' ? 'btn btn-dark' : 'btn btn-outline-dark'}>Reviews</button>
+                        <button onClick={() => handleReviewTab()} className={btnValue == 'review' ? 'btn btn-dark' : 'btn btn-outline-dark'}>Reviews</button>
                     </div>
                     <div className='single-product__body--content'>
-                        <p dangerouslySetInnerHTML={{ __html: product.description }}></p>
+                        {
+                            btnValue == 'des' ? <p dangerouslySetInnerHTML={{ __html: product.description }}></p> :
+                                <div >
+                                    <ReviewComponent staticx={false} productId={router.query.id} />
+                                    {
+                                        productReview ? productReview.map((sig, index) => <ReviewComponent staticx={true} ratingObj={sig} />) : <Loading />
+                                    }
+                                </div>
+                        }
                     </div>
                 </div>
             </div>
