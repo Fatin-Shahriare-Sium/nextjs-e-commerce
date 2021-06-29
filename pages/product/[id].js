@@ -8,7 +8,6 @@ import Product_Action from '../../store/action/productAction';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Navbar_Action from '../../store/action/navbarAction';
-import Dollar from '../../component/dollar';
 import Navbar3 from '../../component/navbar3';
 import love from '../../assets/love.svg';
 import filllove from '../../assets/love-fill.svg'
@@ -37,6 +36,7 @@ const SingleProduct = ({ product }) => {
     let [wish, setWish] = useState(false)
     let [fetchReview, setFetchReview] = useState(false)
     let [productReview, setProductReview] = useState()
+
     useEffect(async () => {
         if (productState.products.length <= 0) {
             let res = await fetch(`${url}/product/all`)
@@ -60,7 +60,7 @@ const SingleProduct = ({ product }) => {
 
 
     useEffect(() => {
-        console.log('fetch review usestate');
+
         if (fetchReview) {
             fetch(`${url}/review/find?productId=${router.query.id}`, {
                 method: 'GET'
@@ -162,9 +162,11 @@ const SingleProduct = ({ product }) => {
                         </div>
 
                     </div>
-                    <div className='single-product__wishlist-icon'>
-                        <img style={{ width: '30px' }} onClick={() => handleWishlist()} src={wish ? filllove : love} />
-                    </div>
+                    {
+                        auth.user && <div className='single-product__wishlist-icon'>
+                            <img style={{ width: '30px' }} onClick={() => handleWishlist()} src={wish ? filllove : love} />
+                        </div>
+                    }
                 </div>
                 <div className='single-product__body'>
                     <div className='single-product__body--header'>
@@ -175,7 +177,9 @@ const SingleProduct = ({ product }) => {
                         {
                             btnValue == 'des' ? <p dangerouslySetInnerHTML={{ __html: product.description }}></p> :
                                 <div >
-                                    <ReviewComponent autoRefresher={handleReviewTab} staticx={false} productId={router.query.id} />
+                                    {
+                                        auth.user && <ReviewComponent autoRefresher={handleReviewTab} staticx={false} productId={router.query.id} />
+                                    }
                                     <hr />
                                     {
                                         productReview ? productReview.map((sig, index) => <ReviewComponent staticx={true} ratingObj={sig} />) : <Loading />

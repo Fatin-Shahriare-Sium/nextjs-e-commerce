@@ -8,14 +8,14 @@ import moment from 'moment'
 const ReviewComponent = ({ staticx, ratingObj, productId, autoRefresher }) => {
     let [starx, setStarx] = useState(new Array(5).fill(false))
     let [comment, setComment] = useState('')
-    let [reviewUser, setReviewUser] = useState({ name: '', time: '' })
+    let [reviewUser, setReviewUser] = useState({ name: '', time: '', profilePic: '' })
     let { auth } = useData()
     let { url } = useUrl()
     useEffect(() => {
         if (staticx) {
             console.log('ratingObj', ratingObj);
             setComment(ratingObj.reviewText)
-            setReviewUser({ name: ratingObj.user.name, time: ratingObj.createdAt })
+            setReviewUser({ name: ratingObj.user.name, time: ratingObj.createdAt, profilePic: ratingObj.user.profilePic })
             //ratings star 
             let newStarx = new Array(5).fill(false)
             for (let i = 0; i <= ratingObj.ratings; i++) {
@@ -67,7 +67,10 @@ const ReviewComponent = ({ staticx, ratingObj, productId, autoRefresher }) => {
         <div style={staticx ? { ...REVIEW_WRAPPER_STYLE, boxShadow: 'rgb(0 0 0 / 10%) -1px 4px 20px 20px' } : REVIEW_WRAPPER_STYLE} className='review-wrapper'>
 
             <div className='review-user'>
-                <img src={auth.user.profilePic == '' ? usericon : auth.user.profilePi} alt="" />
+                {
+                    staticx ? <img style={{ width: '40px', height: '40px', borderRadius: '50%', objectFit: 'cover' }} src={reviewUser.profilePic} alt="" /> :
+                        <img style={{ width: '40px', height: '40px', borderRadius: '50%', objectFit: 'cover' }} src={auth.user.profilePic == '' ? usericon : auth.user.profilePic} alt="" />
+                }
             </div>
             <div className='review-box ms-5'>
                 {

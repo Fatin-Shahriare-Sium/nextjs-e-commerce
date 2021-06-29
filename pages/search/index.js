@@ -28,7 +28,7 @@ const SearchIndex = () => {
     let [brandArray, setBrandArray] = useState(new Array(brandsName.length).fill(false))
     let [cateValue, setcateValue] = useState([])
     let [brandValue, setbrandValue] = useState([])
-    let [searchedProducts, setSearchedProducts] = useState()
+    let [searchedProducts, setSearchedProducts] = useState([])
     let [value, setValue] = useState({ low: '', high: '' })
 
 

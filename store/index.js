@@ -19,11 +19,15 @@ export let useData = () => {
 
 let DataProvider = ({ children }) => {
 
-    let [auth, setAuth] = useState({ user: typeof window !== 'undefined' && JSON.parse(localStorage.getItem('userx')), tokenx: typeof window !== 'undefined' && localStorage.getItem('tokenx') })
+    let [auth, setAuth] = useState({ user: '', tokenx: '' })
     let [state, dispatch] = useReducer(productReducer, inState)
     useEffect(() => {
 
         dispatch({ type: Product_Action.LOAD_CART })
+
+        if (localStorage.getItem('userx')) {
+            setAuth({ user: JSON.parse(localStorage.getItem('userx')), tokenx: localStorage.getItem('tokenx') })
+        }
 
     }, [])
     let store = {

@@ -67,7 +67,11 @@
     z-index: 1;
     background-color: #6AE23C;
 }
-
+.navbar-icon--user img{
+    object-fit: contain;
+    width: 30px;
+    height: 30px;
+}
 
 
 /* navbar2 */

@@ -4,12 +4,32 @@
     box-shadow: rgb(0 0 0 / 10%) 1px -2px 20px 0px;
     margin: 0px auto;
 }
+.profile-img{
+  height:170px;
+  width: 230px;
+   margin-left: 15%;
+  object-fit: contain;
 
-
+}
+.user-sidebar__btn{
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.user-sidebar__input{
+  position: absolute;
+  top: 0;
+  top: 23%;
+  left: 0;
+  opacity: 0;
+  cursor: pointer;
+}
 .user-sidebar__img{
     display: flex;
     flex-direction: column;
     padding-top: 7%;
+    position: relative;
 }
 .user-sidebar__img button{
     width: 30%;
