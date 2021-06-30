@@ -23,6 +23,7 @@ let DataProvider = ({ children }) => {
     let [auth, setAuth] = useState({ user: '', tokenx: '' })
     let [state, dispatch] = useReducer(productReducer, inState)
     let { updateCartedProductToServer, updateCartedProductToClient } = UseUpdate()
+
     useEffect(() => {
 
 
@@ -32,9 +33,10 @@ let DataProvider = ({ children }) => {
 
         }
 
-    }, [])
+    }, [typeof window !== 'undefined' && localStorage.getItem('userx')])
+
     useEffect(() => {
-        console.log('updateCartedProductToClient', auth);
+
 
         if (auth.user) {
             console.log('updateCartedProductToClient');
@@ -51,6 +53,7 @@ let DataProvider = ({ children }) => {
             updateCartedProductToServer(auth.user._id)
         }
     }, [JSON.stringify(state.carted)])
+
 
     let store = {
         productState: state,

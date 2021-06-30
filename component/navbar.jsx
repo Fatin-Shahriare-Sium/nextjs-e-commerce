@@ -63,7 +63,9 @@ const Navbar = () => {
                                 </div>
                             </Link> : <div className="navbar-icon--user">
                                 <img onClick={toggleLogin} src={usericon} alt="" />
-                                {renderLoginForm}
+                                {login && <div className='loginfrom-navbar'>
+                                    {renderLoginForm}
+                                </div>}
                             </div>
                         }
                     </div>

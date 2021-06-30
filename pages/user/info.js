@@ -4,21 +4,22 @@ import { useData } from '../../store';
 import Link from 'next/link.js'
 
 const Info = () => {
-    let {auth}=useData()
-    let {url}=useUrl()
-    let [userInfo,setUserInfo]=useState('')
-    useEffect(()=>{
-        fetch(`${url}/user/info/${auth.user._id}`,{
-            method:'GET'
-        }).then(res=>res.json())
-        .then((data)=>{
-            console.log(data);
-            setUserInfo(data.userInfo)
-        })
-    },[])
+    let { auth } = useData()
+    let { url } = useUrl()
+    let [userInfo, setUserInfo] = useState('')
+
+    useEffect(() => {
+        fetch(`${url}/user/info/${auth.user._id}`, {
+            method: 'GET'
+        }).then(res => res.json())
+            .then((data) => {
+                console.log(data);
+                setUserInfo(data.userInfo)
+            })
+    }, [])
     return (
         <div className='user-info ms-5 mt-5'>
-            <p style={{fontSize:'2.3rem',textDecoration:'underline'}}>Account Information</p>
+            <p style={{ fontSize: '2.3rem', textDecoration: 'underline' }}>Account Information</p>
             <div class="mb-3">
                 <label class="form-label">Name</label>
                 <p>{userInfo.name}</p>
@@ -37,11 +38,11 @@ const Info = () => {
             <div class="mb-3">
                 <label class="form-label">Date of Birth</label>
                 <p>{userInfo.brithDate}</p>
-            </div> 
+            </div>
             <Link href={`/user/edit-info/${userInfo._id}`}>
-            <button style={{fontSize:"1.7rem"}} className='btn btn-outline-dark mt-5'>Edit Information</button>
+                <button style={{ fontSize: "1.7rem" }} className='btn btn-outline-dark mt-5'>Edit Information</button>
             </Link>
-        
+
         </div>
     )
 }

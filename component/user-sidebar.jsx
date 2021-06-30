@@ -11,22 +11,37 @@ import { useState, useCallback } from 'react'
 import useUrl from './hooks/useUrl.jsx'
 import { useData } from '../store/index.js'
 import Alert from './alert.jsx'
+import UseLogout from './hooks/useLogout.jsx'
 const UserSidebar = () => {
     let [btnValue, setBtnValue] = useState('Account Info')
     let { url } = useUrl()
     let { auth } = useData()
     let [preImg, setpreImg] = useState()
     let [error, setError] = useState()
+    let { handleLogout } = UseLogout()
     function handleFileInput(e) {
         let img = e.target.files[0]
+        if (img.size >= 13000) {
+            return setError({
+                msg: "we don't accept more than 13kb",
+                color: 'warning'
+            })
+        }
 
         let preUrl = URL.createObjectURL(img)
         let profilePic = document.getElementById('profile-img')
         profilePic.src = preUrl
         setpreImg(img)
+        return setError({
+            msg: "",
+            color: ''
+        })
     }
 
     function handleBtn(value) {
+        if (value == 'logout') {
+            return handleLogout()
+        }
         setBtnValue(value)
     }
     let handleImgUploader = async (picx) => {
@@ -70,7 +85,7 @@ const UserSidebar = () => {
         <div className='user-sidebar'>
             <div className="user-sidebar__img">
                 {error && <Alert text={error.msg} color={error.color} />}
-                {auth.user.profilePic && <img className='profile-img' id='profile-img' src={auth.user.profilePic} />}
+                {auth.user && <img className='profile-img' id='profile-img' src={auth.user.profilePic ? auth.user.profilePic : user} />}
 
                 <div className='user-sidebar__btn'>
 
@@ -89,7 +104,7 @@ const UserSidebar = () => {
                 <UserSingleTab href='/user/reviews' icon={comment} handler={handleBtn} value={btnValue} name='Reviews' />
                 <UserSingleTab href='/user/order' icon={order} handler={handleBtn} value={btnValue} name={'Your Orders'} />
                 <UserSingleTab href='/user/changepassword' icon={key} handler={handleBtn} value={btnValue} name={'Change Password'} />
-                <UserSingleTab href='/user/logout' icon={logout} handler={handleBtn} value={btnValue} name={'logout'} />
+                <UserSingleTab href='' icon={logout} handler={handleBtn} value={btnValue} name={'logout'} />
 
 
             </div>

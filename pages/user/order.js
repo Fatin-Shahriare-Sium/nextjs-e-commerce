@@ -15,6 +15,11 @@ const Order = () => {
             })
 
     }, [])
+    if (orders.length <= 0) {
+        return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh' }} >
+            <p style={{ fontSize: '2rem', fontWeight: '700' }}>You have not created any order</p>
+        </div>
+    }
     return (
         <div>
             <table class="table">
@@ -31,7 +36,7 @@ const Order = () => {
                         orders.map((sig, index) => <tr>
 
                             <td>
-                                <Link href={`/orderdetails/${sig._id}`}>
+                                <Link href={`/orderdetails?id=${sig._id}`}>
 
                                     {`Order-${sig._id}`}
 

@@ -1,9 +1,8 @@
 .login{
     background-color: #ffffff;
     border-radius: 17px;
-    box-shadow: rgb(0,0,0,.1) 1px -2px 20px 0px;
-    z-index: 17;
-    min-height: 50vh;
+
+   
 }
 .login-form input{
     font-size: 1.7rem;
@@ -17,7 +16,7 @@
     width: 83%;
     display: flex;
     justify-content: center;
-    margin: 9% auto;
+    margin: 1% auto;
 }
 .login-form label{
     font-size: 1.5rem;
@@ -32,10 +31,21 @@
 .navbar-icon--user{
     position: relative;
 }
-.login{
+.loginfrom-navbar{
+    position: absolute;
+    right: 83%;
+    top: 130%;
+    width: 370px;
+    box-shadow: rgb(0,0,0,.1) 1px -2px 20px 0px;
+    min-height: 50vh;
+    z-index: 17;
+    background-color: #ffffff;
+    border-radius: 17px;
+}
+/* .login{
     position: absolute;
     right: 83%;
     top: 130%;
     width: 370px;
 
-}
+} */
