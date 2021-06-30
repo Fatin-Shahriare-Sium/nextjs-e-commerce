@@ -1,9 +1,11 @@
+import UseUpdate from "../../component/hooks/useUpdate"
 import useUrl from "../../component/hooks/useUrl"
 import Navbar_Action from "../action/navbarAction"
 import Product_Action from "../action/productAction"
 let { url } = useUrl()
 
 let productReducer = (state, action) => {
+
     if (action.type == Product_Action.SAVE_PRODUCT) {
         return {
             ...state,
