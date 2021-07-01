@@ -26,20 +26,19 @@ let DataProvider = ({ children }) => {
 
     useEffect(() => {
 
+        console.log("typeof window !== 'undefined' && localStorage.getItem('userx')");
+
+        setAuth({ user: JSON.parse(localStorage.getItem('userx')), tokenx: localStorage.getItem('tokenx') })
 
 
-        if (localStorage.getItem('userx')) {
-            setAuth({ user: JSON.parse(localStorage.getItem('userx')), tokenx: localStorage.getItem('tokenx') })
 
-        }
-
-    }, [typeof window !== 'undefined' && localStorage.getItem('userx')])
+    }, [typeof window !== 'undefined' && localStorage.getItem('tokenx')])
 
     useEffect(() => {
 
 
         if (auth.user) {
-            console.log('updateCartedProductToClient');
+
             updateCartedProductToClient(auth.user._id)
             dispatch({ type: Product_Action.LOAD_CART })
         } else {

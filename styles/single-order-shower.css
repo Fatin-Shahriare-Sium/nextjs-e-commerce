@@ -1,4 +1,25 @@
+
+.oders-details-menubar{
+    display: none;
+}
+.order-empty-msg{
+    display: flex;
+    height: 80vh;
+    justify-content: center;
+    align-items: center;
+}
+.order-empty-msg p{
+    font-size: 2.3rem;
+    font-weight: 700;
+}
+
+
+
+
+
+
 /* Single-order-timeline start */
+
 .timeline-container{
     width: 90%;
     margin: 1% auto;
@@ -62,3 +83,12 @@
     box-shadow: rgb(0 0 0 / 10%) -1px 4px 20px 20px;
 }
 /* Single-order-timeline End */
+
+@media screen and (max-width:700px) {
+    .order-details__sidebar{
+        display: none;
+    }
+    .oders-details-menubar{
+        display: block;
+    }
+}

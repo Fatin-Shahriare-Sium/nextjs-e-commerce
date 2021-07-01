@@ -104,7 +104,7 @@ const UserSidebar = () => {
                 <UserSingleTab href='/user/reviews' icon={comment} handler={handleBtn} value={btnValue} name='Reviews' />
                 <UserSingleTab href='/user/order' icon={order} handler={handleBtn} value={btnValue} name={'Your Orders'} />
                 <UserSingleTab href='/user/changepassword' icon={key} handler={handleBtn} value={btnValue} name={'Change Password'} />
-                <UserSingleTab href='' icon={logout} handler={handleBtn} value={btnValue} name={'logout'} />
+                <UserSingleTab href='/login' icon={logout} handler={handleBtn} value={btnValue} name={'logout'} />
 
 
             </div>

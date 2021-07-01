@@ -1,5 +1,4 @@
 .navbar-container{
-    min-height: 17vh;
     width: 100%;
     background-color: #ffffff;
     top: 0;
@@ -73,6 +72,9 @@
     height: 30px;
 }
 
+.navbar-brand img{
+    display: none;
+}
 
 /* navbar2 */
 .navbar2{
@@ -145,11 +147,46 @@
     margin: 1% auto;
 }
 .carousel-img{
-    width: 500px;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
 }
 .react-multi-carousel-list{
     height: 67vh!important;
 }
+.react-multi-carousel-dot-list{
+    bottom: 50%;
+}
+/* NAVBAR 3 END */
+
+/*-------Nabvar Offcanvas css start----------  */
+
+.nav-list-item p{
+    margin: 0px;
+    margin-left: 3%;
+    font-size: 2rem;
+    font-weight: 500;
+}
+.nav-list-item{
+    display: flex;
+    background-color:#ffffff;
+    align-items: center;
+    padding: 7px;
+    margin-top: 2% ;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+.nav-list-item:hover{
+    background-color: #6AE23C;
+}
+
+
+
+/*-------Nabvar Offcanvas css end----------  */
 
 /* category item css start */
 
@@ -180,3 +217,39 @@
         font-size: 2.7rem;
     }
   }
+
+
+@media screen and (max-width:700px) {
+
+    .navbar2{
+        display: none;
+        background-color: red;
+    }
+    .navbar-brand p{
+        display: none;
+    }
+    .navbar-brand img{
+        display: block;
+        margin-left: 5%;
+        cursor: pointer;
+        height: 17px;
+    }
+    .navbar-icon{
+        display: none;
+    }
+    .navbar-search{
+        width: 90%;
+    }
+    .carosule-left{
+        display: none;
+    }
+    .carosule-right{
+        flex: 1;
+    }
+    .react-multi-carousel-list{
+        height: 43vh!important;
+    }
+    /* .carousel-img{
+        left: 75%;
+    } */
+}

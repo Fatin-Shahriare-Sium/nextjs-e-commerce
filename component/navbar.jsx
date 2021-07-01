@@ -10,17 +10,21 @@ import Link from 'next/link'
 import CartedOffcanvas from './carted-offcanvas'
 import { useData } from '../store'
 import Navbar_Action from '../store/action/navbarAction'
-
-
+import menubar from '../assets/menu.svg'
+import NavOffCanvas from './nav-offcanvas'
 const Navbar = () => {
     let router = useRouter()
     let { productState, dispatch, auth } = useData()
     let [category, setCategory] = useState(router.pathname !== '/' ? false : true)
     let [login, setLogin] = useState(false)
+    let [slider, setSlider] = useState(false)
     let cart = productState.controller.cartShow
 
     function toggleCategory() {
         dispatch({ type: Navbar_Action.TOOGLE_CATEGORY })
+    }
+    function toggleSlider() {
+        setSlider(pre => !pre)
     }
     function toggleLogin() {
 
@@ -39,10 +43,12 @@ const Navbar = () => {
 
     return (
         <div id='navbar-container' className='navbar-container'>
+            {slider && <NavOffCanvas show={slider} handleSlider={toggleSlider} />}
             <div style={{ zIndex: '70' }} className='fixed'>
                 <div id='navbar' className='navbar'>
                     <div className="navbar-brand">
                         <p style={{ fontSize: '2.7rem', fontWeight: '700' }}>Shawon Mill</p>
+                        <img onClick={toggleSlider} src={menubar} alt="" />
                     </div>
                     <div className="navbar-search">
                         <input type="text" placeholder='search' />

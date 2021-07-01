@@ -3,9 +3,9 @@ import { useRouter } from 'next/router.js'
 const UseLogout = () => {
     let router = useRouter()
     function handleLogout() {
-        localStorage.setItem('userx', '')
-        localStorage.getItem('tokenx', '')
-        router.push('/')
+        localStorage.setItem('userx', JSON.stringify(''))
+        localStorage.setItem('tokenx', JSON.stringify(''))
+        router.push('/login')
     }
     return { handleLogout }
 }
