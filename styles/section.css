@@ -40,6 +40,7 @@
     box-shadow: 20px 8px 0px 0px;
     transform: translate(2%,5%);
 }
+
 .section-card__img{
     position: relative;
     margin-top:11%!important;
@@ -73,8 +74,8 @@
     font-weight: 700;
 }
 @media screen and (max-width:700px) {
-    .section-card__container{
-        
-        
+    .section-card:hover{
+        box-shadow: 10px 8px 0px 0px;
+        transform: translate(2%,3%);
     }
 }

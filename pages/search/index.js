@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
+import SearchSliderOffcanvas from '../../component/search-slider-offcanvas'
 import SectionCard from '../../component/section-card'
 import { useData } from '../../store'
+import menuIcon from '../../assets/menu.svg'
 import Product_Action from '../../store/action/productAction'
+import { useRouter } from 'next/router.js'
 let categoriesName = [
     { name: 'Smart Phone', value: 'smart phone' },
     { name: 'Desktop', value: 'desktop' },
@@ -24,12 +27,22 @@ let brandsName = [
 
 const SearchIndex = () => {
     let { productState, dispatch } = useData()
+    let router = useRouter()
     let [cateArray, setCateArray] = useState(new Array(categoriesName.length).fill(false))
     let [brandArray, setBrandArray] = useState(new Array(brandsName.length).fill(false))
     let [cateValue, setcateValue] = useState([])
     let [brandValue, setbrandValue] = useState([])
     let [searchedProducts, setSearchedProducts] = useState([])
+    let [slider, setSlider] = useState(false)
     let [value, setValue] = useState({ low: '', high: '' })
+
+    function toggleSlider() {
+        setSlider(pre => !pre)
+    }
+
+
+
+
 
 
     useEffect(() => {
@@ -41,7 +54,46 @@ const SearchIndex = () => {
         setSearchedProducts(JSON.parse(localStorage.getItem('__allProduct')))
     }, [])
 
+    useEffect(() => {
+        let categoryName = router.query.category
+        let allProducts = JSON.parse(localStorage.getItem('__allProduct'))
+        if (router.isReady && categoryName !== 'all') {
+            if (categoryName == 'smart phone') {
+                let precateArray = cateArray
+                precateArray[0] = true
+                setCateArray([...precateArray])
 
+            } else if (categoryName == 'desktop') {
+                let precateArray = cateArray
+                precateArray[1] = true
+                setCateArray([...precateArray])
+
+            } else if (categoryName == 'watch') {
+                let precateArray = cateArray
+                precateArray[2] = true
+                setCateArray([...precateArray])
+
+            } else if (categoryName == 'ac') {
+                let precateArray = cateArray
+                precateArray[3] = true
+                setCateArray([...precateArray])
+            } else if (categoryName == 'motor bike') {
+                let precateArray = cateArray
+                precateArray[4] = true
+                setCateArray([...precateArray])
+            } else if (categoryName == 'tv') {
+                let precateArray = cateArray
+                precateArray[5] = true
+                setCateArray([...precateArray])
+            } else if (categoryName == 'laptop') {
+                let precateArray = cateArray
+                precateArray[6] = true
+                setCateArray([...precateArray])
+            }
+            setSearchedProducts(allProducts.filter(sig => sig.category == categoryName))
+            console.log(categoryName);
+        }
+    }, [router.isReady])
 
     let handleCheckBoxCategory = (position) => {
         let precateArray = cateArray
@@ -181,6 +233,39 @@ const SearchIndex = () => {
 
     return (
         <div className='search-panel'>
+            {/* offcanvas slider code start */}
+            {slider &&
+                <SearchSliderOffcanvas show={slider} handleSlider={toggleSlider}>
+                    <div className="search-panel__sidebar__offcanvas">
+                        <div className="search-panel__sidebar--rangebox mt-3">
+                            <form onSubmit={(event) => handlePriceInputBox(event)}>
+                                <p style={{ fontSize: '1.5rem', fontWeight: '700' }}>Price</p>
+                                <div className="randebox-input ">
+                                    <input type="number" />
+                                    <p style={{ margin: '0px', fontSize: '1.3rem' }}>to</p>
+                                    <input type="number" />
+                                </div>
+                                <button type='submit' style={{ width: '23%', fontSize: '1.3rem' }} className='btn btn-outline-success mt-3'>Go</button>
+                            </form>
+                        </div>
+                        <div className="search-panel__sidebar--category-box">
+                            <p style={{ fontSize: '1.5rem', fontWeight: '700' }}>Categories</p>
+                            {categoriesName.map((sig, index) => <div class="form-check">
+                                <input key={index} class="form-check-input" onChange={() => handleCheckBoxCategory(index)} checked={cateArray[index]} type="checkbox" value={sig.value} id="flexCheckDefault" />
+                                <label class="form-check-label" for="flexCheckDefault">{sig.name}</label>
+                            </div>)}
+                        </div>
+                        <div className="search-panel__sidebar--brand">
+                            <p style={{ fontSize: '1.5rem', fontWeight: '700' }}>Brands</p>
+                            {brandsName.map((sig, index) => <div class="form-check">
+                                <input key={index} class="form-check-input" onChange={() => handleCheckBoxBrand(index)} checked={brandArray[index]} type="checkbox" value={sig.value} id="flexCheckDefault" />
+                                <label class="form-check-label" for="flexCheckDefault">{sig.name}</label>
+                            </div>)}
+                        </div>
+                    </div>
+                </SearchSliderOffcanvas>}
+
+            {/*  offcanvas slider code end */}
             <div className="search-panel__sidebar">
                 <div className="search-panel__sidebar--rangebox mt-3">
                     <form onSubmit={(event) => handlePriceInputBox(event)}>
@@ -209,6 +294,7 @@ const SearchIndex = () => {
                 </div>
             </div>
             <div className="search-panel__main">
+                <img style={{ width: "17px", marginBottom: '3%' }} onClick={toggleSlider} className='search-hamburger' src={menuIcon} />
                 <div className="search-panel__navbar">
                     <div style={{ marginLeft: '3%' }}>
                         <p style={{ fontSize: '1.5rem', fontWeight: '500' }} >{searchedProducts.length} products found</p>

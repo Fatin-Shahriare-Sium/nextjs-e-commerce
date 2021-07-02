@@ -77,3 +77,36 @@ input::-webkit-inner-spin-button {
   display: flex;
   flex-wrap: wrap;
 }
+.search-hamburger{
+  display: none;
+}
+.search-panel__sidebar__offcanvas > div{
+  margin-left: 3%;
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+@media screen and (max-width:700px) {
+  .search-panel__sidebar{
+    display: none;
+  }
+  .search-panel__main{
+    flex: 1;
+  }
+  .search-panel__navbar div{
+    margin-left: 1%;
+  }
+  .search-hamburger{
+    display: block;
+  }
+  .search-panel__sidebar--category-box > div {
+    margin: 3% 0px;
+    font-size: 2rem;
+    font-weight: 500;
+  }
+  .search-panel__sidebar--brand > div{
+    margin: 3% 0px;
+    font-size: 2rem;
+    font-weight: 500;
+  }
+}
