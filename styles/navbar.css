@@ -163,6 +163,58 @@
 }
 /* NAVBAR 3 END */
 
+
+/* Bottom navbar start */
+.bottom-nav{
+    position:fixed;
+    bottom: 0;
+    z-index: 10;
+    width: 100%;
+    background-color: #ffffff;
+    min-height: 9vh;
+    box-shadow: rgb(0 0 0 / 10%) 1px -2px 20px 0px;
+    display: none;
+}
+
+.bottom-nav-link{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.bottom-nav-item{
+   margin-top: 3%;
+}
+.bottom-nav-item__top{
+    margin-top: -7%;
+    background-color: #6AE23C;
+    width: 13%;
+    padding: 5px;
+    border-radius: 50%;
+}
+.bottom-nav-item__top p{
+    text-align: center;
+}
+.bottom-nav-item p{
+    font-size: 1.7rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+/* Bottom navbar end */
+
+
+
+
+
 /*-------Nabvar Offcanvas css start----------  */
 
 .nav-list-item p{
@@ -249,7 +301,8 @@
     .react-multi-carousel-list{
         height: 43vh!important;
     }
-    /* .carousel-img{
-        left: 75%;
-    } */
+    .bottom-nav{
+        display: block;
+    }
+  
 }

@@ -1,10 +1,11 @@
 import React from 'react'
-
-const Layout = ({children}) => {
+import BottomNav from './bottom-nav';
+const Layout = ({ children }) => {
     return (
-        <div style={{backgroundColor:'#ffffff',minHeight:'100vh'}} className='layout'>
+        <div style={{ backgroundColor: '#ffffff', minHeight: '100vh' }} className='layout'>
+
             {children}
-        
+            <BottomNav />
         </div>
     )
 }

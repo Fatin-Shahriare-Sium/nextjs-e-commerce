@@ -44,7 +44,7 @@ let DataProvider = ({ children }) => {
         } else {
             dispatch({ type: Product_Action.LOAD_CART })
         }
-    }, [auth])
+    }, [auth,])
 
     useEffect(() => {
 
