@@ -175,7 +175,7 @@ const SingleProduct = ({ product }) => {
                     </div>
                     <div className='single-product__body--content'>
                         {
-                            btnValue == 'des' ? <p dangerouslySetInnerHTML={{ __html: product.description }}></p> :
+                            btnValue == 'des' ? <div className='details-html' dangerouslySetInnerHTML={{ __html: product.description }}></div> :
                                 <div >
                                     {
                                         auth.user && <ReviewComponent autoRefresher={handleReviewTab} staticx={false} productId={router.query.id} />

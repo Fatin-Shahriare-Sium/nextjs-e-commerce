@@ -152,6 +152,14 @@
     min-height: 80vh;
     margin-top: 5%;
 }
+/* .single-product__body--content .details-html h1{
+    font-size: 2.1rem;
+    font-weight: 500;
+} */
+.single-product__body--content .details-html p{
+    font-size: 1.7rem;
+    font-weight: 500;
+}
 /* review component css */
 .review-wrapper{
     width: 500px;
