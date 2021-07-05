@@ -1,34 +1,49 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+<div align="center" style='text-align:center;font-family:bismillah;font-size:2rem' dir="rtl">عنوان</div>
 
-First, run the development server:
+# MERN STACK - E-commerce 
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+This app's frontEnd is created using Nextjs .For,backend [admin panel/CMS] i use ReactJs,Nodejs,Expressjs and for database MongoDB.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### CMS/Admin panel
+- [Github](https://github.com/Fatin-Shahriare-Sium/mern-e-commerce)
+- [Website Url](https://github.com/Fatin-Shahriare-Sium/mern-e-commerce)
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### FrontEnd 
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+- [Github](https://github.com/Fatin-Shahriare-Sium/nextjs-e-commerce)
+- [Website Url]( nextjs-e-commerce-two.vercel.app )
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## FrontEnd Technologies
 
-## Learn More
+- Nextjs
+- Bootstrap 5
+- JWT
+- Context Api + Reducer [Redux,not work properly on SSR.]
+- Momentjs
+- Nextjs Image Optimization
+- Stripe Payment Gateway
 
-To learn more about Next.js, take a look at the following resources:
+## Backend Technologies
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+#### CMS/Admin panel-
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- ReactJs
+- Bootstrap 5
+- Momentjs
+- Quill Text Editor
 
-## Deploy on Vercel
+#### Server
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Nodejs
+- Expressjs
+- MongoDB
+- Mongoose
+- JWT
+- Bcrypt
+- .env
+- Stripe
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+>Alhamdulillah,by the grace of Allah,i have become able to build up this website.
+    #allahisalmighty
