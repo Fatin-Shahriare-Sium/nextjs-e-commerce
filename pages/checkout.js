@@ -8,7 +8,6 @@ import useUrl from '../component/hooks/useUrl'
 import Link from 'next/link.js'
 import { useData } from '../store'
 // import the stylesheet
-import 'react-step-progress/dist/index.css';
 import OrderSummery from '../component/order-summery'
 import CartedProductShower from '../component/carted-product-shower'
 import PaymentController from '../component/payment-controller'

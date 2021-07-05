@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { connect, useSelector } from 'react-redux'
 import Cart from './cart'
 import Dollar from './dollar'
 import StripeCheckout from 'react-stripe-checkout';
