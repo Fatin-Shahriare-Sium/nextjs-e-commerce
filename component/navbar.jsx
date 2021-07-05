@@ -12,12 +12,18 @@ import { useData } from '../store'
 import Navbar_Action from '../store/action/navbarAction'
 import menubar from '../assets/menu.svg'
 import NavOffCanvas from './nav-offcanvas'
+import useUrl from './hooks/useUrl'
+import SingleSearchResult from './single-search-result'
+
 const Navbar = () => {
     let router = useRouter()
+    let { url } = useUrl()
     let { productState, dispatch, auth } = useData()
     let [category, setCategory] = useState(router.pathname !== '/' ? false : true)
     let [login, setLogin] = useState(false)
     let [slider, setSlider] = useState(false)
+    let [searched, setSearched] = useState()
+    let [text, setText] = useState('')
     let cart = productState.controller.cartShow
 
     function toggleCategory() {
@@ -32,6 +38,18 @@ const Navbar = () => {
     }
     function toggleCartedOffcanvas() {
         dispatch({ type: Navbar_Action.TOGGLE_CART })
+    }
+
+    function handleSearch(textx) {
+
+        if (textx) {
+            fetch(`${url}/product/search/${textx}`, {
+                method: 'GET'
+            }).then(res => res.json())
+                .then(data => {
+                    setSearched(data.searchedProducts)
+                })
+        }
     }
     let renderLoginForm = useMemo(() => {
         return login && <Login handle={toggleLogin} />
@@ -51,10 +69,16 @@ const Navbar = () => {
                         <img onClick={toggleSlider} src={menubar} alt="" />
                     </div>
                     <div className="navbar-search">
-                        <input type="text" placeholder='search' />
+                        <input onChange={(event) => setText(event.target.value)} value={text} type="text" placeholder='search' />
                         <div className='navbar-search--icon'>
-                            <img src={search} alt="" />
+                            <img onClick={() => handleSearch(text)} src={search} alt="" />
                         </div>
+                        {
+                            searched && <div className='search-result__wrapper'>
+                                <p onClick={() => setSearched('')} style={{ fontSize: '1.5rem', marginLeft: 'auto', marginRight: '3%', cursor: 'pointer', fontWeight: '700', maxWidth: 'max-content' }}>x</p>
+                                {searched.map(sig => <SingleSearchResult id={sig._id} title={sig.title} img={sig.img[0]} />)}
+                            </div>
+                        }
                     </div>
                     <div className="navbar-icon">
                         <div data-length={productState.carted.length} className="navbar-icon--cart">

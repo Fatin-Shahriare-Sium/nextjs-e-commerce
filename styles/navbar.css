@@ -20,6 +20,7 @@
     display: flex;
     background-color: #6AE23C;
     align-items: center;
+    position: relative;
 }
 .navbar-search  input{
     width: 90%;
@@ -33,6 +34,15 @@
 }
 .navbar-search  input::placeholder{
     font-size: 2rem;
+}
+.search-result__wrapper{
+    position: absolute;
+    top: 100%;
+    margin-top: 1%;
+    height: 10vh;
+    background-color: #ffffff;
+    box-shadow: rgb(0 0 0 / 10%) -1px 4px 20px 20px;
+    width: 100%;
 }
 .navbar-icon{
     display: flex;
