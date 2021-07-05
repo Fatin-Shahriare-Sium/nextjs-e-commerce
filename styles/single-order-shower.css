@@ -21,7 +21,7 @@
 /* Single-order-timeline start */
 
 .timeline-container{
-    width: 90%;
+    width: 970px;
     margin: 1% auto;
     background-color: #ffffff;
     min-height: 57vh;
@@ -82,6 +82,8 @@
     margin: 1% auto;
     box-shadow: rgb(0 0 0 / 10%) -1px 4px 20px 20px;
 }
+
+
 /* Single-order-timeline End */
 
 @media screen and (max-width:700px) {
@@ -90,5 +92,16 @@
     }
     .oders-details-menubar{
         display: block;
+    }
+    .timeline-box__container{
+        width: 700px;
+        overflow-x:auto;
+    }
+}
+@media screen and (max-width:500px) {
+
+    .timeline-box__container{
+        width: 500px;
+        overflow-x:auto;
     }
 }

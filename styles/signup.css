@@ -66,8 +66,10 @@
 .text-2{
     font-size: 2rem;
     font-weight: 500;
+    width: 100%;
     max-width: max-content;
     position: relative;
+
 }
 .text-2::before{
     content: '';
@@ -131,5 +133,14 @@
     }
     100%{
         opacity: 1;
+    }
+}
+
+@media screen and (max-width:700px) {
+    .text-wrapper{
+        transform: rotate(0deg);
+    }
+    .text-div{
+        width: 150%;
     }
 }

@@ -77,7 +77,9 @@ const OrderDetails = () => {
                     {selectedOrder && < SingleOrderSummery order={selectedOrder} />}
                     {selectedOrder && <SingleOrderProduct orderedProduct={selectedOrder.product} paymentStatus={selectedOrder.paymentStatus} totalAmount={selectedOrder.totalAmount} />}
 
-                    {selectedOrder && <SingleOrderTimeline orderTimeline={selectedOrder.orderTimeline} />}
+                    <div className='timeline-box__container'>
+                        {selectedOrder && <SingleOrderTimeline orderTimeline={selectedOrder.orderTimeline} />}
+                    </div>
                     <div style={{ height: '10vh' }}>
 
                     </div>
