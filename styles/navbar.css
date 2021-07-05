@@ -197,12 +197,15 @@
 .bottom-nav-item__top{
     margin-top: -7%;
     background-color: #6AE23C;
-    width: 13%;
+    width:60px;
     padding: 5px;
+    background-image: url(../assets/circle.svg);
+    background-size: cover;
     border-radius: 50%;
 }
 .bottom-nav-item__top p{
     text-align: center;
+    color: #ffffff;
 }
 .bottom-nav-item p{
     font-size: 1.7rem;
