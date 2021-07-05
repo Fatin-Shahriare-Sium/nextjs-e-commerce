@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import useUrl from "../component/hooks/useUrl";
 import Navbar3 from "../component/navbar3";
 import Offcanvas from "../component/offcanvas";
 import Section from "../component/scetion";
@@ -6,7 +7,8 @@ import { useData } from "../store";
 import Product_Action from "../store/action/productAction";
 
 export async function getServerSideProps() {
-    let res = await fetch('http://localhost:5000/product/all')
+    let { url } = useUrl()
+    let res = await fetch(`${url}/product/all`)
     let data = await res.json()
     return {
         props: {
