@@ -306,3 +306,10 @@
     }
   
 }
+@media screen and (max-width:400px){
+
+    .bottom-nav-item__top{
+       width: 17%;
+      margin-top: -11%;
+    }
+}

@@ -74,6 +74,11 @@
     font-weight: 700;
 }
 @media screen and (max-width:700px) {
+    .section-card{
+  
+        width: 40%;
+    }
+  
     .section-card:hover{
         box-shadow: 10px 8px 0px 0px;
         transform: translate(2%,3%);

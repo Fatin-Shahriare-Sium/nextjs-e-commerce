@@ -55,6 +55,12 @@ const NavOffCanvas = ({ show, handleSlider }) => {
                                 <p>AllProducts</p>
                             </div>
                         </Link>
+                        <Link href='/credit'>
+                            <div onClick={handleSlider} className="nav-list-item">
+                                <img src={targetIcon} alt="" />
+                                <p>Credit</p>
+                            </div>
+                        </Link>
                         {auth.user && <Link href='/orderdetails'>
                             <div onClick={handleSlider} className="nav-list-item">
                                 <img src={locationx} alt="" />
