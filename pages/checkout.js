@@ -37,10 +37,12 @@ const StepIndex = () => {
 
 
     useEffect(() => {
-        if (localStorage.getItem('tokenx') == '') {
+
+        if (JSON.parse(localStorage.getItem('userx')) == "") {
+
             router.push('/login')
         }
-    }, [])
+    }, [typeof window !== 'undefined' && localStorage.getItem('tokenx')])
 
 
 
