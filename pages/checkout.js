@@ -7,6 +7,7 @@ import AddressSelector from '../component/address-selector'
 import useUrl from '../component/hooks/useUrl'
 import Link from 'next/link.js'
 import { useData } from '../store'
+import { useRouter } from 'next/router.js'
 // import the stylesheet
 import OrderSummery from '../component/order-summery'
 import CartedProductShower from '../component/carted-product-shower'
@@ -15,6 +16,7 @@ import PaymentController from '../component/payment-controller'
 const StepIndex = () => {
     let { url } = useUrl()
     let { auth, productState } = useData()
+    let router = useRouter()
     let [allAddress, setAlladdress] = useState()
     let [radio, setRadio] = useState()
     let [step, setStep] = useState(0)
@@ -32,6 +34,18 @@ const StepIndex = () => {
 
             })
     }, [])
+
+
+    useEffect(() => {
+        if (localStorage.getItem('tokenx') == '') {
+            router.push('/login')
+        }
+    }, [])
+
+
+
+
+
 
     let handleRadio = (index, id) => {
 
