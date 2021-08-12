@@ -17,9 +17,10 @@
     align-items: center;
     position: relative;
 }
-.input-box__eye{
+.input-box button,.input-box__eye{
     position: absolute;
     right: 3%;
+    top: 9%;
 }
 .custom-toast{
     font-size: 1.5rem;

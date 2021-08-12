@@ -25,13 +25,19 @@ let DataProvider = ({ children }) => {
     let { updateCartedProductToServer, updateCartedProductToClient } = UseUpdate()
 
     useEffect(() => {
-
+        console.log('tokenx value', localStorage.getItem('tokenx'));
         console.log("typeof window !== 'undefined' && localStorage.getItem('userx')");
 
-        setAuth({ user: JSON.parse(localStorage.getItem('userx')), tokenx: localStorage.getItem('tokenx') })
+        if (localStorage.getItem('tokenx') == null || localStorage.getItem('tokenx') == 'undefined') {
+            setAuth({ user: '', tokenx: '' })
+        } else {
+
+            console.log(" if (localStorage.getItem('tokenx'))");
+            setAuth({ user: JSON.parse(localStorage.getItem('userx')), tokenx: localStorage.getItem('tokenx') })
+        }
 
 
-
+        // localStorage.setItem('tokenx', JSON.stringify(''))
     }, [typeof window !== 'undefined' && localStorage.getItem('tokenx')])
 
     useEffect(() => {
@@ -44,7 +50,7 @@ let DataProvider = ({ children }) => {
         } else {
             dispatch({ type: Product_Action.LOAD_CART })
         }
-    }, [auth,])
+    }, [auth])
 
     useEffect(() => {
 

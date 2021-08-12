@@ -46,13 +46,19 @@ const SearchIndex = () => {
 
 
     useEffect(() => {
-
+        let products = JSON.parse(localStorage.getItem('__allProduct'))
         if (productState.products.length <= 0) {
-            let products = localStorage.getItem('__allProduct')
-            dispatch({ type: Product_Action.SAVE_PRODUCT, payload: { allProducts: JSON.parse(products) } })
+
+            dispatch({ type: Product_Action.SAVE_PRODUCT, payload: { allProducts: products } })
         }
-        setSearchedProducts(JSON.parse(localStorage.getItem('__allProduct')))
+        console.log(products);
+        setSearchedProducts(products)
     }, [])
+
+    useEffect(() => {
+        searchedProducts
+        console.log('searchedProducts', searchedProducts);
+    }, [searchedProducts])
 
     useEffect(() => {
         let categoryName = router.query.category
@@ -90,7 +96,12 @@ const SearchIndex = () => {
                 precateArray[6] = true
                 setCateArray([...precateArray])
             }
-            setSearchedProducts(allProducts.filter(sig => sig.category == categoryName))
+
+            if (categoryName) {
+
+                return setSearchedProducts(allProducts.filter(sig => sig.category == categoryName))
+            }
+
             console.log(categoryName);
         }
     }, [router.isReady])
@@ -118,6 +129,7 @@ const SearchIndex = () => {
 
     function findSearchedProducts(categoryArray, brandArrayx, low, high) {
         let main_ProductArray = productState.products
+        console.log('main_ProductArray', main_ProductArray);
         let x = []
         if (categoryArray.length <= 0 && brandArrayx.length <= 0) {
             if (low && high) {
