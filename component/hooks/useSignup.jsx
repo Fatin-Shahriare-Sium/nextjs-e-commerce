@@ -35,7 +35,7 @@ let useSignUp = () => {
             conPass: pass !== conPass ? 'Password is not matching' : '',
             color: ''
         })
-        if (pass == conPass && email && name) {
+        if (pass == conPass && email && name && pass) {
             console.log('pass==conPass && email && name');
             fetch(`${url}/auth/signup`, {
                 method: 'POST',

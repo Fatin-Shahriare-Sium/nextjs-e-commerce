@@ -42,9 +42,9 @@ const Index = () => {
                     <label class="form-label">Password</label>
                     <div className="input-box">
                         <input id='password' type="password" class="form-control" />
-                        <button type='button'>
-                            <img className='input-box__eye' src={eye1 ? eyeX : eye} onClick={() => handleEye(document.getElementById('password'), 1)} />
-                        </button>
+
+                        <img className='input-box__eye' src={eye1 ? eyeX : eye} onClick={() => handleEye(document.getElementById('password'), 1)} />
+
                     </div>
                     {error.password && <Small text={error.password} />}
                 </div>
@@ -52,9 +52,8 @@ const Index = () => {
                     <label class="form-label">Confrim Password</label>
                     <div className="input-box">
                         <input id='con-password' type="password" class="form-control" />
-                        <button type='button'>
-                            <img className='input-box__eye' src={eye2 ? eyeX : eye} onClick={() => handleEye(document.getElementById('con-password'), 2)} />
-                        </button>
+                        <img className='input-box__eye' src={eye2 ? eyeX : eye} onClick={() => handleEye(document.getElementById('con-password'), 2)} />
+
                     </div>
                     {error.conPass && <Small text={error.conPass} />}
                 </div>
