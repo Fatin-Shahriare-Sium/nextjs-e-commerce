@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import useSignUp from "../../component/hooks/useSignup";
@@ -9,6 +9,12 @@ import Offcanvas from "../../component/offcanvas";
 import CartedOffcanvas from "../../component/carted-offcanvas";
 const Index = () => {
     let { eye1, eye2, handleEye, handleSignUp, error } = useSignUp()
+    let [loading, setLoading] = useState(false)
+
+    function handleLoadingShower(e) {
+
+        setLoading(pre => !pre)
+    }
 
     function createToast() {
         error.color == 'success' ? toast.success(error.msg, {
@@ -17,17 +23,23 @@ const Index = () => {
             className: 'custom-toast'
         })
     }
-    error.msg && createToast()
+    useEffect(() => {
+        if (error.msg) {
+            createToast()
+        }
+    }, [error.msg])
+    // 
     if (process.browser) {
         window.onbeforeunload = () => {
             // your callback
 
         }
     }
+    //
     return (
         <div className='signup'>
             <p style={{ fontSize: '2rem', fontWeight: '700', textDecoration: 'underline' }}>Sign Up</p>
-            <form onSubmit={(event) => handleSignUp(event)}>
+            <form onSubmit={(event) => { handleSignUp(event, handleLoadingShower) }}>
                 <div class="mb-3">
                     <label class="form-label">Your Name</label>
                     <input type="text" class="form-control" />
@@ -57,7 +69,10 @@ const Index = () => {
                     </div>
                     {error.conPass && <Small text={error.conPass} />}
                 </div>
-                <button type="submit" class="btn btn-outline-success">Create Account</button>
+                {loading ? <button class="btn btn-outline-success" type="button" disabled>
+                    <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                    Loading...
+                </button> : <button type="submit" class="btn btn-outline-success">Create Account</button>}
             </form>
             <ToastContainer position="top-center"
                 newestOnTop={false}

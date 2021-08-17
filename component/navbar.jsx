@@ -88,7 +88,7 @@ const Navbar = () => {
                             auth.user ? <Link href='/user/info'>
                                 <div className="navbar-icon--user">
 
-                                    {typeof window !== 'undefined' && <img src={auth.user.profilePic} alt="" />}
+                                    {typeof window !== 'undefined' && <img src={auth.user.profilePic ? auth.user.profilePic : usericon} alt="" />}
 
                                 </div>
                             </Link> : <div className="navbar-icon--user">

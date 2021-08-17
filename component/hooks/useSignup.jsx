@@ -1,11 +1,12 @@
 import { useState } from "react"
 import useUrl from "./useUrl"
-
+import { useRouter } from 'next/router'
 let useSignUp = () => {
     let { url } = useUrl()
     let [eye1, setEye1] = useState(false)
     let [eye2, setEye2] = useState(false)
     let [error, setError] = useState({})
+    let router = useRouter()
     let handleEye = (e, eye) => {
 
         if (e.type == 'text') {
@@ -22,7 +23,7 @@ let useSignUp = () => {
         setError({})
     }
 
-    let handleSignUp = (e) => {
+    let handleSignUp = (e, showLoader) => {
         e.preventDefault()
         let name = e.target[0].value
         let email = e.target[1].value
@@ -37,6 +38,7 @@ let useSignUp = () => {
         })
         if (pass == conPass && email && name && pass) {
             console.log('pass==conPass && email && name');
+            showLoader()
             fetch(`${url}/auth/signup`, {
                 method: 'POST',
                 headers: {
@@ -56,6 +58,13 @@ let useSignUp = () => {
                         msg: data.msg,
                         color: data.color
                     })
+                    showLoader()
+                    if (data.color == 'success') {
+                        console.log('success');
+                        setTimeout(() => {
+                            router.push('/')
+                        }, 300)
+                    }
                 })
         }
     }
