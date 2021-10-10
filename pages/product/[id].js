@@ -60,7 +60,7 @@ const SingleProduct = ({ product }) => {
 
 
     useEffect(() => {
-
+        let html = `<h1 class='single-product-details__title'>Allah is Almighty</h1><table class="table table-striped"><thead><tr><td>Car</td><td>Rocket</td></tr></thead><tbody><tr><td>CHEAP</td><td>EXPENSIVE</td></tr><tr><td>Slow</td><td>Speedy</td></tr></tbody></table>`
         if (fetchReview) {
             fetch(`${url}/review/find?productId=${router.query.id}`, {
                 method: 'GET'
@@ -71,6 +71,8 @@ const SingleProduct = ({ product }) => {
                     setFetchReview(false)
                 })
         }
+        let x = document.getElementById('single-product__body--content')
+        x.innerHTML = html
     }, [fetchReview])
 
     if (process.browser) {
@@ -173,8 +175,8 @@ const SingleProduct = ({ product }) => {
                         <button onClick={() => setBtnValue('des')} className={btnValue == 'des' ? 'btn btn-dark' : 'btn btn-outline-dark'}>Description</button>
                         <button onClick={() => handleReviewTab()} className={btnValue == 'review' ? 'btn btn-dark' : 'btn btn-outline-dark'}>Reviews</button>
                     </div>
-                    <div className='single-product__body--content'>
-                        {
+                    <div id='single-product__body--content' className='single-product__body--content'>
+                        {/* {
                             btnValue == 'des' ? <div className='details-html' dangerouslySetInnerHTML={{ __html: product.description }}></div> :
                                 <div >
                                     {
@@ -185,7 +187,8 @@ const SingleProduct = ({ product }) => {
                                         productReview ? productReview.map((sig, index) => <ReviewComponent staticx={true} ratingObj={sig} />) : <Loading />
                                     }
                                 </div>
-                        }
+                        } */}
+
                     </div>
                 </div>
             </div>
