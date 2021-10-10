@@ -5,12 +5,12 @@ import useSignUp from "../../component/hooks/useSignup";
 import Small from "../../component/small";
 import eye from '../../assets/eye.svg'
 import eyeX from '../../assets/eye-slash.svg'
-import Offcanvas from "../../component/offcanvas";
-import CartedOffcanvas from "../../component/carted-offcanvas";
+import { useRouter } from 'next/router'
+
 const Index = () => {
     let { eye1, eye2, handleEye, handleSignUp, error } = useSignUp()
     let [loading, setLoading] = useState(false)
-
+    let router = useRouter()
     function handleLoadingShower(e) {
 
         setLoading(pre => !pre)
@@ -26,6 +26,9 @@ const Index = () => {
     useEffect(() => {
         if (error.msg) {
             createToast()
+        }
+        if (!(localStorage.getItem('tokenx') == null || localStorage.getItem('tokenx') == 'undefined')) {
+            router.push('/')
         }
     }, [error.msg])
     // 
