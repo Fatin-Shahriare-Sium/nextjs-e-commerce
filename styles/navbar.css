@@ -199,13 +199,14 @@
     background-color: #6AE23C;
     width:60px;
     padding: 5px;
-    background-image: url(../assets/circle.svg);
+    /* background-image: url(../assets/circle.svg);
     background-size: cover;
-    border-radius: 50%;
+    border-radius: 50%; */
+    clip-path: circle();
 }
 .bottom-nav-item__top p{
     text-align: center;
-    color: #ffffff;
+    color: #000000;
 }
 .bottom-nav-item p{
     font-size: 1.7rem;

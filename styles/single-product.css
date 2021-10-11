@@ -158,7 +158,8 @@
 } */
 .single-product__body--content .details-html{
     max-width: 1030px;
-    margin: 3% auto;
+    margin:1% auto;
+    padding: 11px;
 }
 .single-product__body--content .details-html p{
     font-size: 1.7rem;

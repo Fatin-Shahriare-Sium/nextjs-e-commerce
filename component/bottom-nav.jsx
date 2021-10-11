@@ -23,7 +23,6 @@ const BottomNav = () => {
                 </div>
                 <div className="bottom-nav-item__top">
                     <Link href='/'>
-
                         <p style={{ fontSize: '4rem', fontWeight: "700", cursor: "pointer" }}>S</p>
                     </Link>
                 </div>

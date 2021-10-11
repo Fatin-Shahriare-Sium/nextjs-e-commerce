@@ -22,7 +22,7 @@ import UserSidebar from '../component/user-sidebar.jsx'
 function MyApp({ Component, pageProps }) {
     let router = useRouter()
     function render_App() {
-        console.log(router);
+        // console.log(router);
         if (router.pathname == '/user' || router.pathname == '/user/changepassword' || router.pathname == '/user/info' || router.pathname == `/user/edit-info/[id]` || router.pathname == '/user/address' || router.pathname == '/user/address/create' || router.pathname == '/user/address/edit/[id]' || router.pathname == '/user/wishlist' || router.pathname == '/user/order' || router.pathname == '/user/reviews') {
 
 
