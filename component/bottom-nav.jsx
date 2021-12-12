@@ -30,7 +30,7 @@ const BottomNav = () => {
                     {auth.user ? <Link href='/user/info'>
                         <img style={{ width: '30px', height: '30px', objectFit: "contain", border: '2px solid #000000', borderRadius: '50%', cursor: "pointer" }} src={auth.user.profilePic ? auth.user.profilePic : userIcon} />
                     </Link> :
-                        <Link href='/loin'>
+                        <Link href='/login'>
                             <img style={{ cursor: 'pointer' }} src={userIcon} />
                         </Link>
                     }
