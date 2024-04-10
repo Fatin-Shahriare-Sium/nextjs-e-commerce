@@ -9,14 +9,17 @@
   },
   "dependencies": {
     "bootstrap": "^5.0.1",
+    "eslint-config-next": "^13.5.6",
     "moment": "^2.29.1",
-    "next": "10.2.3",
+    "next": "^13.5.6",
     "next-images": "^1.7.0",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
+    "next-superjson": "^0.0.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-multi-carousel": "^2.6.3",
     "react-share": "^4.4.0",
     "react-stripe-checkout": "^2.6.3",
-    "react-toastify": "^7.0.4"
+    "react-toastify": "^7.0.4",
+    "superjson": "^1.13.3"
   }
 }

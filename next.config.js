@@ -7,3 +7,11 @@ module.exports = withImages({
     return config
   }
 })
+
+// const nextConfig = {
+//   reactStrictMode: true,
+// }
+
+// const { withSuperjson } = require('next-superjson')
+
+// module.exports = withSuperjson()(nextConfig)

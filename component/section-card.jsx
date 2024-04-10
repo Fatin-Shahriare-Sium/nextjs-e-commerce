@@ -17,7 +17,7 @@ const SectionCard = ({img,title,price,priceoff,href}) => {
         <Link href={href}>
         <div data-off={priceoff && `${priceoff}%`} className='section-card'> 
             <div className="section-card__img">
-                <Image width={200} className='section-card__imgx' objectFit='contain' height={200} src={img}/>
+                <Image width={200}  className='section-card__imgx' objectFit='contain' height={200} src={img} />
             </div>
             <div className="section-card__details mt-5">
                 <p style={{textAlign:'center',fontSize:'1.7rem',fontWeight:'500',wordBreak:'break-all'}}>{textTruncate(title)}</p>

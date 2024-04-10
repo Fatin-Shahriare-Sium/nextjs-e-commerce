@@ -43,7 +43,7 @@ const Section = ({ title, product, link }) => {
                 {product.length <= 0 ? <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <p style={{ fontSize: '2rem', fontWeight: '700' }}>No products found</p>
                 </div> :
-                    product[0].price ? product.map((sig, index) => <SectionCard href={`/product/${sig._id}`} key={index} title={sig.title} priceoff={sig.priceOff} price={sig.price} img={sig.img[0].src} />) :
+                    product[0].price ? product.map((sig, index) => <SectionCard href={`/product/${sig._id}`} key={index} title={sig.title} priceoff={sig.priceOff} price={sig.price} img={sig.img.length>0?sig.img[0].src:0} />) :
                         product.map((sig, index) => <SectionCard href='/brand' title={sig.title} key={index} price='' priceoff='' img={sig.img} />)
                 }
 

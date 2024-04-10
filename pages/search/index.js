@@ -321,7 +321,7 @@ const SearchIndex = () => {
                     </div>
                 </div>
                 <div className="search-panel__results">
-                    {searchedProducts && searchedProducts.map((sig, index) => <SectionCard href={`/product/${sig._id}`} title={sig.title} img={sig.img[0].src} price={sig.price} priceoff={sig.priceOff} />)}
+                    {searchedProducts && searchedProducts.map((sig, index) => <SectionCard href={`/product/${sig._id}`} title={sig.title} img={sig.img.length>0?sig.img[0].src:""} price={sig.price} priceoff={sig.priceOff} />)}
                 </div>
             </div>
         </div>

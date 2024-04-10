@@ -93,11 +93,9 @@
 }
 
 .single-product-btn--buy{
-    width: 30%;
     background-color: #6AE23C;
     border-radius: 13px;
     padding: 7px;
-    margin-left: 3%;
     transition: all .3s ease;
     cursor: pointer;
 }
