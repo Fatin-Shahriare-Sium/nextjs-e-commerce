@@ -5,7 +5,7 @@ import { useData } from "../../store";
 const Wishlist = () => {
   let { auth } = useData();
   let { url } = useUrl();
-  let [wishlist, setWishlist] = useState();
+  let [wishlist, setWishlist] = useState([]);
   useEffect(() => {
     fetch(`${url}/user/wishlist/detail?userId=${auth.user._id}`, {
       method: "GET",

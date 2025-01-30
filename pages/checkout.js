@@ -38,10 +38,7 @@ const StepIndex = () => {
   }, [typeof window !== "undefined" && auth.user._id]);
 
   useEffect(() => {
-    if (
-      localStorage.getItem("tokenx") == null ||
-      localStorage.getItem("tokenx") == "undefined"
-    ) {
+    if (localStorage.getItem("tokenx") == null || localStorage.getItem("tokenx") == "undefined") {
       router.push("/login");
     }
   }, [typeof window !== "undefined" && localStorage.getItem("tokenx")]);
@@ -89,24 +86,10 @@ const StepIndex = () => {
           }}
         >
           {allAddress.map((sig, index) => (
-            <AddressSelector
-              handle={handleRadio}
-              id={sig._id}
-              key={index}
-              index={index}
-              radio={radio}
-              name={sig.name}
-              email={sig.email}
-              country={sig.country}
-              city={sig.city}
-              streetAddress={sig.streetAddress}
-              code={sig.postalCode}
-            />
+            <AddressSelector handle={handleRadio} id={sig._id} key={index} index={index} radio={radio} name={sig.name} email={sig.email} country={sig.country} city={sig.city} streetAddress={sig.streetAddress} code={sig.postalCode} />
           ))}
           <Link href="user/address/create">
-            <button className="btn btn-outline-success">
-              Add Shipping Address
-            </button>
+            <button className="btn btn-outline-success">Add Shipping Address</button>
           </Link>
         </div>
       </>
@@ -123,13 +106,7 @@ const StepIndex = () => {
     } else if (step == 1) {
       return radio && AddressComponent();
     } else if (step == 2) {
-      return (
-        <PaymentController
-          success={showSuccessComponenet}
-          handlePaymentMethod={handlePaymentMethod}
-          addressId={addressId}
-        />
-      );
+      return <PaymentController success={showSuccessComponenet} handlePaymentMethod={handlePaymentMethod} addressId={addressId} />;
     } else if (step == 3) {
       return (
         <div
@@ -141,10 +118,7 @@ const StepIndex = () => {
             alignItems: "center",
           }}
         >
-          <p className="success-text">
-            Thanks for placing order.We are verifing your payment status.Then,we
-            will process your order,inshallah
-          </p>
+          <p className="success-text">Thanks for placing order.We are verifing your payment status.Then,we will process your order,inshallah</p>
         </div>
       );
     }
@@ -254,33 +228,17 @@ const StepIndex = () => {
   return (
     <div className="step-progressbar">
       <div className="step-progressbar__container">
-        <div
-          style={stepIncreaser()}
-          className="progressbar"
-          id="progress"
-        ></div>
-        <div
-          style={step >= 0 ? { border: "5px solid #018FF4" } : {}}
-          className="progress-logo"
-        >
+        <div style={stepIncreaser()} className="progressbar" id="progress"></div>
+        <div style={step >= 0 ? { border: "5px solid #018FF4" } : {}} className="progress-logo">
           <img src={cartLogo} alt="" />
         </div>
-        <div
-          style={step >= 1 ? { border: "5px solid #018FF4" } : {}}
-          className="progress-logo"
-        >
+        <div style={step >= 1 ? { border: "5px solid #018FF4" } : {}} className="progress-logo">
           <img src={location} alt="" />
         </div>
-        <div
-          style={step >= 2 ? { border: "5px solid #018FF4" } : {}}
-          className="progress-logo"
-        >
+        <div style={step >= 2 ? { border: "5px solid #018FF4" } : {}} className="progress-logo">
           <img src={payment} alt="" />
         </div>
-        <div
-          style={step >= 3 ? { border: "5px solid #018FF4" } : {}}
-          className="progress-logo"
-        >
+        <div style={step >= 3 ? { border: "5px solid #018FF4" } : {}} className="progress-logo">
           <img src={complete} alt="" />
         </div>
         <div className="fake-progressbar" id="progress"></div>
@@ -288,49 +246,21 @@ const StepIndex = () => {
       <div className="step-progressbar__content container-fluid">
         {/* Modal start */}
 
-        <div
-          class={modal ? "modal fade show" : "modal fade"}
-          style={modal ? { display: "block" } : { display: "none" }}
-        >
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">
+        <div class={modal ? "modal fade show" : "modal fade"} style={modal ? { display: "block" } : { display: "none" }}>
+          <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="exampleModalLabel">
                   {paymentMethod == "bkash" ? "Bkash" : "Nagad"}
                 </h5>
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                  onClick={toggleModal}
-                  aria-label="Close"
-                ></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" onClick={toggleModal} aria-label="Close"></button>
               </div>
-              <div class="modal-body">
-                <p style={{ fontSize: "1.7rem", fontWeight: "500" }}>
-                  Please,send money to 018723e92832 this number.Then,put your
-                  tnxId here.we will check it soon
-                </p>
-                <input
-                  style={{ width: "90%", margin: "0px auto" }}
-                  onChange={
-                    paymentMethod == "bkash"
-                      ? (event) => setTnxId(event.target.value)
-                      : (event) => setTnxId(event.target.value)
-                  }
-                  placeholder="tnxId"
-                />
+              <div className="modal-body">
+                <p style={{ fontSize: "1.7rem", fontWeight: "500" }}>Please,send money to 018723e92832 this number.Then,put your tnxId here.we will check it soon</p>
+                <input style={{ width: "90%", margin: "0px auto" }} onChange={paymentMethod == "bkash" ? (event) => setTnxId(event.target.value) : (event) => setTnxId(event.target.value)} placeholder="tnxId" />
               </div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  onClick={
-                    paymentMethod == "bkash"
-                      ? handleBkashPayment
-                      : handleNagadPayment
-                  }
-                  class="btn btn-primary"
-                >
+              <div className="modal-footer">
+                <button type="button" onClick={paymentMethod == "bkash" ? handleBkashPayment : handleNagadPayment} class="btn btn-primary">
                   Done
                 </button>
               </div>
@@ -355,18 +285,10 @@ const StepIndex = () => {
                     }
               }
             >
-              <button
-                style={{ fontSize: "1.3rem" }}
-                onClick={handleBack}
-                className="btn btn-outline-dark"
-              >
+              <button style={{ fontSize: "1.3rem" }} onClick={handleBack} className="btn btn-outline-dark">
                 Back
               </button>
-              <button
-                style={{ fontSize: "1.3rem" }}
-                onClick={handleNext}
-                className="btn btn-outline-success"
-              >
+              <button style={{ fontSize: "1.3rem" }} onClick={handleNext} className="btn btn-outline-success">
                 {step == 2 ? "Pay" : "Next"}
               </button>
             </div>
@@ -384,10 +306,7 @@ const StepIndex = () => {
               }
             >
               <Link href="/">
-                <button
-                  style={{ fontSize: "1.3rem" }}
-                  className="btn btn-outline-primary"
-                >
+                <button style={{ fontSize: "1.3rem" }} className="btn btn-outline-primary">
                   Shop More
                 </button>
               </Link>
