@@ -7,12 +7,11 @@ export async function middleware(request: NextRequest) {
 
   const hasToken = request.cookies.has("comm_token");
   console.log("middleware", request.nextUrl.pathname);
-  if (hasToken) {
-    if (request.nextUrl.pathname == "/login" || request.nextUrl.pathname == "/signup") {
-      return NextResponse.redirect(new URL("/", request.url));
-    } else {
-      return NextResponse.next();
-    }
+  if (request.nextUrl.pathname == "/login" || (request.nextUrl.pathname == "/signup" && hasToken)) {
+    return NextResponse.redirect(new URL("/", request.url));
+  }
+  if (hasToken && request.nextUrl.pathname.startsWith("/user")) {
+    return NextResponse.next();
   } else {
     return NextResponse.redirect(new URL("/login", request.url));
   }
