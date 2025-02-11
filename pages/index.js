@@ -65,7 +65,6 @@ const Home = ({ products }) => {
       <Section product={products.filter((sig) => sig.category == "watch")} link="watch" title="Watch" />
       <Section product={products.filter((sig) => sig.category == "motor bike")} link="motor bike" title="Motor Bike" />
       <Section product={products.filter((sig) => sig.category == "tv")} link="tv" title="Smart Tv" />
-      <p style={{ fontSize: "4rem", fontWeight: "700" }}>Allah is Almighty</p>
     </>
   );
 };
